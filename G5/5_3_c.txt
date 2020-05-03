@@ -1,0 +1,1 @@
+γ farmacia.nome; count(prescricao.numPresc) -> numero_de_prescricao (π farmacia.nome,prescricao.numPresc  (prescricao ⨝ nome=farmacia farmacia))

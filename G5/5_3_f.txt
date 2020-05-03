@@ -1,0 +1,1 @@
+π paciente.nome (σ presc_med>1 (γ paciente.nome; count(prescs) -> presc_med (γ paciente.nome, prescricao.numMedico; count(prescricao.numMedico) -> prescs (paciente ⨝ paciente.numUtente=prescricao.numUtente (prescricao)))))

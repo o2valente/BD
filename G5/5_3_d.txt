@@ -1,0 +1,1 @@
+π farmaco.formula (σ presc_farmaco.numPresc = null (σ farmaco.numRegFarm=906 (farmaco) ⟕ nome=nomeFarmaco presc_farmaco))

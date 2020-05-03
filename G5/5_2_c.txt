@@ -1,0 +1,1 @@
+γ avg(prod_count)->avg_count_prod (γ item.numEnc; count(item.codProd)->prod_count (item))

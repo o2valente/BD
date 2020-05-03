@@ -1,0 +1,1 @@
+π encomenda.fornecedor,item.codProd,item.unidades ((item) ⨝ item.numEnc = encomenda.numero (encomenda))

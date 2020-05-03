@@ -1,0 +1,1 @@
+π nif,nome,endereco,fax,condpag,tipo ( σ encomenda.numero = null ( encomenda ⟖ encomenda.fornecedor = fornecedor.nif fornecedor ) )

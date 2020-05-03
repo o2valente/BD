@@ -1,0 +1,1 @@
+γ farmacia.nome, farmaceutica.nome; count(farmaco.nome)->numero_farmacos_vendidos (farmaceutica ⨝(farmaceutica.numReg=farmaco.numRegFarm) (farmaco ⨝(farmaco.nome=presc_farmaco.nomeFarmaco) (presc_farmaco ⨝(presc_farmaco.numPresc=prescricao.numPresc) (farmacia ⨝(farmacia.nome=prescricao.farmacia) prescricao))))

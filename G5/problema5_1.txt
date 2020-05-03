@@ -1,0 +1,29 @@
+Problema 5.1)
+
+a) 
+π Pname,Pnumber,Plocation,Dnum,Fname,Minit,Lname,Ssn (((project) ⨝ Pnumber=Pno (works_on)) ⨝ Essn=Ssn (employee))
+
+b)
+π employee.Fname,employee.Minit,employee.Lname ((employee) ⨝ employee.Super_ssn=visio.Ssn (ρ visio (σ Fname='Carlos' ∧ Minit='D' ∧ Lname='Gomes' (employee))))
+
+c)
+γ Pname; total<-sum(Hours) ((project) ⨝ Pnumber=Pno (works_on))
+
+d)
+π Fname,Minit,Lname ((employee) ⨝ Dno=3 ((σ Hours > 20 ((works_on) ⨝works_on.Pno=proj.Pnumber (ρ proj (σ Pname='Aveiro Digital' (project)))))))
+
+e)
+π Fname,Minit,Lname (σ Pno = Null ((employee) ⟕ Ssn=Essn (works_on)))
+
+f)
+γ Dname; Avg_Female_Salary <- avg(Salary) (σ Sex= 'F' ((employee) ⨝ Dno=Dnumber (department)))
+
+g)
+π Fname,Num (σ Num > 2 (γ Fname ; Num <- count(Essn) ((employee) ⨝ Ssn=Essn (dependent))))
+
+h)
+π Fname,Num_dep (σ Num_dep = 0 (γ Fname;Num_dep <- count(Essn) (((employee) ⨝ Ssn=Mgr_ssn (department)) ⟕ Ssn=Essn (dependent))))
+
+i)
+π Fname, Minit, Lname, Address ((((employee) ⨝Ssn=Essn (works_on)) ⨝ Pno=Pnumber (σ Plocation='Aveiro' ((project)))) ⨝Dno=Dnumber  (σ Dlocation!='Aveiro' ((department) ⟕ (dept_location))))
+
