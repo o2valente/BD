@@ -1,0 +1,18 @@
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio de Fermentelos', 11796);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do Vista Alegre', 13214);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio de Alvarenga', 17372);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do LAAC', 13881);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio de Brandão', 10781);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio de Valecambrense', 16388);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do Macieirense', 8165);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do Mansores', 17892);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do UD Mourisquense', 8218);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio de São Roque', 12178);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do Argoncilhe', 14121);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio de CR Antes', 13935);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do Pinheirense', 6113);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do Arrifanense', 11442);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do ACRD Mosteirô', 7135);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio de EF Rui Dolores', 9879);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do Calvão', 7503);
+insert into PROJETO.Estadio (Nome, Capacidade) values ('Estádio do CRAC', 6578);
