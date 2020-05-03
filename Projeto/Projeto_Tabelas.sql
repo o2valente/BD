@@ -2,22 +2,22 @@ create schema PROJETO;
 go
 
 create table PROJETO.Clube(
-	Nome			varchar(250)	not null,
-	Vitorias		int				not null,
-	Derrotas		int				not null,
-	Empates			int				not null,
-	Estadio			varchar(250)	not null,
+	Nome			varchar(100)	not null,
+	Vitorias		tinyint			not null,
+	Derrotas		tinyint			not null,
+	Empates			tinyint			not null,
+	Estadio			varchar(100)	not null,
 	primary key (Nome)
 );
 
 create table PROJETO.Pessoa(
 	NrFederacao		int				not null,
-	Nome			varchar(250)	not null,
+	Nome			varchar(100)	not null,
 	primary key	(NrFederacao)
 );
 
 create table PROJETO.Estadio(
-	Nome			varchar(250)	not null,
+	Nome			varchar(100)	not null,
 	Capacidade		int				not null,
 	primary key (Nome)
 );
@@ -26,53 +26,55 @@ create table PROJETO.Direcao(
 	Presidente		int				not null,
 	PresAssGeral	int				not null,
 	Administrador	int			    not null,
-	nome_clube		varchar(250)	not null,
+	nome_clube		varchar(100)	not null,
 	primary key (Presidente),
 	foreign key (nome_clube)	references PROJETO.Clube(Nome),
-	foreign key (Presidente)	references PROJETO.Pessoa(NrFederacao)
+	foreign key (Presidente)	references PROJETO.Pessoa(NrFederacao),
+	foreign key (PresAssGeral)	references PROJETO.Pessoa(NrFederacao),
+	foreign key (Administrador)	references PROJETO.Pessoa(NrFederacao)
 );
 
 create table PROJETO.GrupoAdeptos(
-	Nome			varchar(250)	not null,
-	AnoFundacao		date			not null,
-	clube_apoia		varchar(250)	not null,
+	Nome			varchar(100)	not null,
+	DataFundacao	date			not null,
+	clube_apoia		varchar(100)	not null,
 	primary key (Nome),
 	foreign key (clube_apoia)	references PROJETO.Clube(Nome)
 );
 
 create table PROJETO.Jogador(
 	NrFederacao		int				not null,
-	NrCamisola		int				not null,
+	NrCamisola		tinyint			not null,
 	Posicao			varchar(50)		not null,
-	clube			varchar(250)	not null,
+	clube			varchar(100)	not null,
 	primary key (NrFederacao),
 	foreign key (nrFederacao)	references PROJETO.Pessoa(NrFederacao),
 	foreign key (clube)			references PROJETO.Clube(Nome)
 );
 
 create table PROJETO.Epoca(
-	Ano				int				not null,
-	Vencedor		varchar(250)	not null,
+	Ano				smallint		not null,
+	Vencedor		varchar(100)	not null,
 	primary key (Ano),
 	foreign key (Vencedor)		references PROJETO.Clube(Nome)
 );
 
 create table PROJETO.Jornada(
-	NrJornada		int				not null,
-	Semana			int				not null,
-	Ano				int				not null,
+	NrJornada		tinyint			not null,
+	Semana			tinyint			not null,
+	Ano				smallint		not null,
 	primary key (NrJornada),
 	foreign key (Ano)			references PROJETO.Epoca(Ano)
 );
 
 create table PROJETO.Jogo(
-	NrJogo			int				not null, --tinhamos como pk NrJornada
+	NrJogo			tinyint			not null, --tinhamos como pk NrJornada
 	NrEspetadores	int				not null,
-	Estadio			varchar(250)	not null,
-	NrJornada		int				not null,
+	Estadio			varchar(100)	not null,
+	NrJornada		tinyint			not null,
 	Arbitro			int				not null, --why?
-	Clube1			varchar(250)	not null,
-	Clube2			varchar(250)	not null,
+	Clube1			varchar(100)	not null,
+	Clube2			varchar(100)	not null,
 	Resultado1		int				not null,
 	Resultado2		int				not null,
 	primary key (NrJogo),
@@ -84,9 +86,9 @@ create table PROJETO.Jogo(
 );
 
 create table PROJETO.Vence(
-	Pontos			int				not null,
-	ClubeVencedor	varchar(250)	not null,
-	AnoEpoca		int				not null,
+	Pontos			tinyint			not null,
+	ClubeVencedor	varchar(100)	not null,
+	AnoEpoca		smallint		not null,
 	primary key (Pontos),
 	foreign key (ClubeVencedor) references PROJETO.Clube(Nome),
 	foreign key (AnoEpoca)		references PROJETO.Epoca(Ano)
@@ -94,13 +96,13 @@ create table PROJETO.Vence(
 
 create table PROJETO.Arbitro(
 	NrFederacao		int				not null,
-	Nome			varchar(250)	not null,
-	primary key (NrFederacao)
+	primary key (NrFederacao),
+	foreign key (NrFederacao)	references PROJETO.Pessoa(NrFederacao)
 );
 
 create table PROJETO.Arbitrar(
 	Arbitro			int				not null,
-	NrJogo			int				not null,
+	NrJogo			tinyint			not null,
 	primary key (Arbitro),
 	foreign key (Arbitro)		references PROJETO.Arbitro(NrFederacao),
 	foreign key (NrJogo)		references PROJETO.Jogo(NrJogo)
@@ -126,18 +128,19 @@ create table PROJETO.QuartoArbitro(
 
 create table PROJETO.Treinador(
 	NrFederacao		int				not null,
-	Nome			varchar(250)	not null,
-	ClubeTreinado	varchar(250)	not null,
+	Nome			varchar(100)	not null,
+	ClubeTreinado	varchar(100)	not null,
 	primary key (NrFederacao),
-	foreign key (ClubeTreinado)	references PROJETO.Clube(Nome)
+	foreign key (ClubeTreinado)	references PROJETO.Clube(Nome),
+	foreign key (NrFederacao)	references PROJETO.Pessoa(NrFederacao)
 );
 
 create table PROJETO.TreinadorSubstitui(
 	TreinadorEntra	 int	  unique	not null,
 	TreinadorSai	 int	  unique	not null,
-	Clube			 varchar(250)		not null,
+	Clube			 varchar(100)		not null,
 	DataSubstituicao date				not null,
-	primary key (DataSubstituicao),
+	primary key (TreinadorEntra,TreinadorSai),
 	foreign key (TreinadorEntra) references PROJETO.Treinador(NrFederacao),	
 	foreign key (TreinadorSai) references PROJETO.Treinador(NrFederacao),	
 	foreign key (Clube) references PROJETO.Clube(Nome),	
@@ -145,7 +148,7 @@ create table PROJETO.TreinadorSubstitui(
 
 create table PROJETO.TreinadorPrincipal(
 	NrFederacao		int					not null,
-	TaticaPreferida varchar(250)		not null,
+	TaticaPreferida varchar(100)		not null,
 	primary key (NrFederacao),
 	foreign key (NrFederacao)	references PROJETO.Treinador(NrFederacao)
 );
