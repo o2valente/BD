@@ -1,13 +1,21 @@
 create schema PROJETO;
 go
 
+
+create table PROJETO.Estadio(
+	Nome			varchar(100)	not null,
+	Capacidade		int				not null,
+	primary key (Nome)
+);
+
 create table PROJETO.Clube(
 	Nome			varchar(100)	not null,
 	Vitorias		tinyint			not null,
 	Derrotas		tinyint			not null,
 	Empates			tinyint			not null,
 	Estadio			varchar(100)	not null,
-	primary key (Nome)
+	primary key (Nome),
+	foreign key (Estadio)	references PROJETO.Estadio(Nome)
 );
 
 create table PROJETO.Pessoa(
@@ -16,11 +24,7 @@ create table PROJETO.Pessoa(
 	primary key	(NrFederacao)
 );
 
-create table PROJETO.Estadio(
-	Nome			varchar(100)	not null,
-	Capacidade		int				not null,
-	primary key (Nome)
-);
+
 
 create table PROJETO.Direcao(
 	Presidente		int				not null,
@@ -165,5 +169,3 @@ create table PROJETO.TreinadorGuardaRedes(
 	foreign key (NrFederacao)	references PROJETO.Treinador(NrFederacao)
 );
 
-alter table PROJETO.Clube
-	add constraint CluEstFK foreign key (Estadio) references PROJETO.Estadio(Nome);
