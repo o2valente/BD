@@ -39,9 +39,9 @@ create table PROJETO.Direcao(
 );
 
 create table PROJETO.GrupoAdeptos(
-	Nome			varchar(100),
-	DataFundacao	date,
-	clube_apoia		varchar(100),
+	Nome			varchar(100)	not null,
+	DataFundacao	date			not null,
+	clube_apoia		varchar(100)	not null,
 	primary key (Nome),
 	foreign key (clube_apoia)	references PROJETO.Clube(Nome)
 );
