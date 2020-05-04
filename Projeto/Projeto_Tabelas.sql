@@ -169,3 +169,4 @@ create table PROJETO.TreinadorGuardaRedes(
 	foreign key (NrFederacao)	references PROJETO.Treinador(NrFederacao)
 );
 
+
