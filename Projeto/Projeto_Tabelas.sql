@@ -58,7 +58,7 @@ create table PROJETO.Jogador(
 
 create table PROJETO.Epoca(
 	Ano				smallint		not null,
-	Vencedor		varchar(100)	not null,
+	Vencedor		varchar(100),
 	primary key (Ano),
 	foreign key (Vencedor)		references PROJETO.Clube(Nome)
 );
@@ -90,9 +90,9 @@ create table PROJETO.Jogo(
 );
 
 create table PROJETO.Vence(
-	Pontos			tinyint			not null,
-	ClubeVencedor	varchar(100)	not null,
-	AnoEpoca		smallint		not null,
+	Pontos			tinyint,
+	ClubeVencedor	varchar(100),
+	AnoEpoca		smallint,
 	primary key (Pontos),
 	foreign key (ClubeVencedor) references PROJETO.Clube(Nome),
 	foreign key (AnoEpoca)		references PROJETO.Epoca(Ano)
@@ -132,22 +132,10 @@ create table PROJETO.QuartoArbitro(
 
 create table PROJETO.Treinador(
 	NrFederacao		int				not null,
-	Nome			varchar(100)	not null,
-	ClubeTreinado	varchar(100)	not null,
+	ClubeTreinado	varchar(100),
 	primary key (NrFederacao),
 	foreign key (ClubeTreinado)	references PROJETO.Clube(Nome),
 	foreign key (NrFederacao)	references PROJETO.Pessoa(NrFederacao)
-);
-
-create table PROJETO.TreinadorSubstitui(
-	TreinadorEntra	 int	  unique	not null,
-	TreinadorSai	 int	  unique	not null,
-	Clube			 varchar(100)		not null,
-	DataSubstituicao date				not null,
-	primary key (TreinadorEntra,TreinadorSai),
-	foreign key (TreinadorEntra) references PROJETO.Treinador(NrFederacao),	
-	foreign key (TreinadorSai) references PROJETO.Treinador(NrFederacao),	
-	foreign key (Clube) references PROJETO.Clube(Nome),	
 );
 
 create table PROJETO.TreinadorPrincipal(
@@ -168,5 +156,18 @@ create table PROJETO.TreinadorGuardaRedes(
 	primary key (NrFederacao),
 	foreign key (NrFederacao)	references PROJETO.Treinador(NrFederacao)
 );
+
+create table PROJETO.TreinadorSubstitui(
+	TreinadorEntra	 int	  unique	not null,
+	TreinadorSai	 int	  unique	not null,
+	Clube			 varchar(100)		not null,
+	DataSubstituicao date				not null,
+	primary key (TreinadorEntra,TreinadorSai),
+	foreign key (TreinadorEntra) references PROJETO.TreinadorPrincipal(NrFederacao),	
+	foreign key (TreinadorSai) references PROJETO.TreinadorPrincipal(NrFederacao),	
+	foreign key (Clube) references PROJETO.Clube(Nome),	
+);
+
+
 
 

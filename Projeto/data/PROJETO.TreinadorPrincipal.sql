@@ -1,0 +1,25 @@
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (501, '4-3-3');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (502, '4-5-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (503, '3-4-2-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (504, '3-2-2-3');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (505, '3-4-2-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (506, '3-4-2-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (507, '3-2-2-3');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (508, '3-4-3');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (509, '4-3-3');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (510, '4-4-2');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (511, '4-2-2-2');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (512, '4-4-2');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (513, '3-4-2-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (514, '4-5-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (515, '3-4-3');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (516, '3-4-2-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (517, '4-2-2-2');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (518, '3-4-3');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (555, '3-2-2-3');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (556, '3-4-2-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (557, '3-4-2-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (558, '4-2-2-2');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (559, '3-4-2-1');
+insert into PROJETO.TreinadorPrincipal (NrFederacao, TaticaPreferida) values (560, '4-2-2-2');
+
