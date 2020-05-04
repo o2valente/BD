@@ -1,0 +1,10 @@
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('56');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('57');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('58');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('59');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('60');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('61');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('62');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('63');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('64');
+insert into PROJETO.ArbitroCampo (NrFederacao) values ('65');
