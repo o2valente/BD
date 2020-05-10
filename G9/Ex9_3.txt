@@ -1,0 +1,14 @@
+Ex 9.3)
+
+i) Na tabela EMPLOYEE colocar um unique clustered index no Ssn
+
+ii) Na tabela EMPLOYEE colocar um composite clustered index no Fname e Lname
+
+iii) Na tabela EMPLOYEE colocar um clustered index no Dno
+
+iv) Na tabela WORKS_ON colocar um composite clustered index no Essn e Pno
+
+v) Na tabela DEPENDENT colocar um composite clustered index no Essn e Dependent_name
+
+vi) Na tabela PROJECT colocar um clustered index no Dnum
+		      colocar um unique non-clustered index no Pnumber
