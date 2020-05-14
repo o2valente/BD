@@ -1,0 +1,10 @@
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (27, 56, 66, 76, 86);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (12, 57, 67, 77, 87);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (34, 58, 68, 78, 88);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (90, 59, 69, 79, 89);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (65, 60, 70, 80, 90);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (8, 61, 71, 81, 91);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (13, 62, 72, 82, 92);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (42, 63, 73, 83, 93);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (30, 64, 74, 84, 94);
+insert into PROJETO.EquipaArbitragem (id, ArbitroCampo, ArbitroLinha1, ArbitroLinha2, QuartoArbitro) values (60, 65, 75, 85, 95);
