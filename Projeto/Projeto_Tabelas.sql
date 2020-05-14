@@ -74,7 +74,7 @@ create table PROJETO.Jogo(
 	NrEspetadores	int				not null,
 	Estadio			varchar(100)	not null,
 	NrJornada		tinyint			not null,
-	EquipaArbitragem int 			not null, --why?
+	EquipaArbitragem tinyint 		not null,
 	Clube1			varchar(100)	not null,
 	Clube2			varchar(100)	not null,
 	Resultado1		int				not null,
@@ -125,13 +125,12 @@ create table PROJETO.QuartoArbitro(
 );
 
 create table PROJETO.EquipaArbitragem(
-	NrJogo			tinyint			not null,
+	ID				tinyint			not null,
 	ArbitroCampo	int				not null,
 	ArbitroLinha1	int				not null,
 	ArbitroLinha2	int				not null,
 	QuartoArbitro	int				not null,
-	primary key (NrJogo),
-	foreign key (NrJogo)		references PROJETO.Jogo(NrJogo),
+	primary key (ID),
 	foreign key (ArbitroCampo)	references PROJETO.ArbitroCampo(NrFederacao),
 	foreign key (ArbitroLinha1)	references PROJETO.ArbitroLinha(NrFederacao),
 	foreign key (ArbitroLinha2)	references PROJETO.ArbitroLinha(NrFederacao),
@@ -176,6 +175,4 @@ create table PROJETO.TreinadorSubstitui(
 	foreign key (Clube) references PROJETO.Clube(Nome),	
 );
 
-
-
-
+ALTER TABLE PROJETO.Jogo ADD FOREIGN KEY(EquipaArbitragem) REFERENCES PROJETO.EquipaArbitragem (ID);
