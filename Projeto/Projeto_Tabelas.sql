@@ -58,9 +58,7 @@ create table PROJETO.Jogador(
 
 create table PROJETO.Epoca(
 	Ano				smallint		not null,
-	Vencedor		varchar(100),
 	primary key (Ano),
-	foreign key (Vencedor)		references PROJETO.Clube(Nome)
 );
 
 create table PROJETO.Jornada(
@@ -76,7 +74,7 @@ create table PROJETO.Jogo(
 	NrEspetadores	int				not null,
 	Estadio			varchar(100)	not null,
 	NrJornada		tinyint			not null,
-	Arbitro			int				not null, --why?
+	EquipaArbitragem int 			not null, --why?
 	Clube1			varchar(100)	not null,
 	Clube2			varchar(100)	not null,
 	Resultado1		int				not null,
@@ -98,24 +96,20 @@ create table PROJETO.Vence(
 	foreign key (AnoEpoca)		references PROJETO.Epoca(Ano)
 );
 
+
 create table PROJETO.Arbitro(
 	NrFederacao		int				not null,
 	primary key (NrFederacao),
-	foreign key (NrFederacao)	references PROJETO.Pessoa(NrFederacao)
+	foreign key (NrFederacao)	references PROJETO.Pessoa(NrFederacao),
 );
 
-create table PROJETO.Arbitrar(
-	Arbitro			int				not null,
-	NrJogo			tinyint			not null,
-	primary key (Arbitro),
-	foreign key (Arbitro)		references PROJETO.Arbitro(NrFederacao),
-	foreign key (NrJogo)		references PROJETO.Jogo(NrJogo)
-);
+
 
 create table PROJETO.ArbitroCampo(
 	NrFederacao		int				not null,
 	primary key (NrFederacao),
-	foreign key (NrFederacao)	references PROJETO.Arbitro(NrFederacao)
+	foreign key (NrFederacao)	references PROJETO.Arbitro(NrFederacao),
+	
 );
 
 create table PROJETO.ArbitroLinha(
@@ -128,6 +122,20 @@ create table PROJETO.QuartoArbitro(
 	NrFederacao		int				not null,
 	primary key (NrFederacao),
 	foreign key (NrFederacao)	references PROJETO.Arbitro(NrFederacao)
+);
+
+create table PROJETO.EquipaArbitragem(
+	NrJogo			tinyint			not null,
+	ArbitroCampo	int				not null,
+	ArbitroLinha1	int				not null,
+	ArbitroLinha2	int				not null,
+	QuartoArbitro	int				not null,
+	primary key (NrJogo),
+	foreign key (NrJogo)		references PROJETO.Jogo(NrJogo),
+	foreign key (ArbitroCampo)	references PROJETO.ArbitroCampo(NrFederacao),
+	foreign key (ArbitroLinha1)	references PROJETO.ArbitroLinha(NrFederacao),
+	foreign key (ArbitroLinha2)	references PROJETO.ArbitroLinha(NrFederacao),
+	foreign key (QuartoArbitro)	references PROJETO.QuartoArbitro(NrFederacao)
 );
 
 create table PROJETO.Treinador(
