@@ -91,7 +91,7 @@ create table PROJETO.Vence(
 	Pontos			tinyint,
 	ClubeVencedor	varchar(100),
 	AnoEpoca		smallint,
-	primary key (Pontos),
+	primary key (AnoEpoca),
 	foreign key (ClubeVencedor) references PROJETO.Clube(Nome),
 	foreign key (AnoEpoca)		references PROJETO.Epoca(Ano)
 );
