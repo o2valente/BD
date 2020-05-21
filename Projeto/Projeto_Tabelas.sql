@@ -70,7 +70,7 @@ create table PROJETO.Jornada(
 );
 
 create table PROJETO.Jogo(
-	NrJogo			tinyint			not null, --tinhamos como pk NrJornada
+	NrJogo			int				not null, --tinhamos como pk NrJornada
 	NrEspetadores	int				not null,
 	Estadio			varchar(100)	not null,
 	NrJornada		tinyint			not null,
