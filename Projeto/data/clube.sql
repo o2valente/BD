@@ -30,6 +30,6 @@ insert into PROJETO.Clube (Nome, Vitorias, Derrotas, Empates, Estadio) values ('
 
 insert into PROJETO.Clube (Nome, Vitorias, Derrotas, Empates, Estadio) values ('EF Rui Dolores', 3, 13, 18, 'Estadio de EF Rui Dolores');
 
-insert into PROJETO.Clube (Nome, Vitorias, Derrotas, Empates, Estadio) values ('Calvao', 4, 16, 14, 'Estadio do Calva');
+insert into PROJETO.Clube (Nome, Vitorias, Derrotas, Empates, Estadio) values ('Calvao', 4, 16, 14, 'Estadio do Calvao');
 
 insert into PROJETO.Clube (Nome, Vitorias, Derrotas, Empates, Estadio) values ('CRAC', 3, 16, 15, 'Estadio do CRAC');
