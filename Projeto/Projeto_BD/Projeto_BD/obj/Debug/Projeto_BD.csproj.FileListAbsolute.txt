@@ -1,0 +1,10 @@
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\bin\Debug\Projeto_BD.exe.config
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\bin\Debug\Projeto_BD.exe
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\bin\Debug\Projeto_BD.pdb
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.csprojAssemblyReference.cache
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.Form1.resources
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.Properties.Resources.resources
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.csproj.GenerateResource.cache
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.csproj.CoreCompileInputs.cache
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.exe
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.pdb
