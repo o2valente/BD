@@ -8,3 +8,4 @@ C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.c
 C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.csproj.CoreCompileInputs.cache
 C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.exe
 C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.pdb
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.TabelaClassificacao.resources

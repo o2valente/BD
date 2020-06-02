@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Navigation;
 
 namespace Projeto_BD
 {
@@ -56,6 +57,11 @@ namespace Projeto_BD
            
         }
 
-        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form goTabela = new TabelaClassificacao();
+            goTabela.Show();
+        }
     }
 }
