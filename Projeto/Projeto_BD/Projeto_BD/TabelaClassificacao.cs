@@ -32,14 +32,7 @@ namespace Projeto_BD
             SqlDataReader reader = clubes.ExecuteReader();
             while (reader.Read())
             {
-                for (int i = 0; i< tableLayoutPanel1.RowCount;i++)
-                {
-                    posicao[i] = new Label
-                    {
-                        Text = i.ToString()
-                    };
-                    tableLayoutPanel1.Controls.Add(posicao[i],0,i);
-                }
+                
             }
             CN.Close();
         }
