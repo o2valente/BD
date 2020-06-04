@@ -38,9 +38,9 @@ namespace Projeto_BD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //j_nr = Int32.Parse(this.textBox1.Text);
+            j_nr = Int32.Parse(this.textBox1.Text);
             
-            //GetJornada(j_nr);
+            GetJornada(j_nr);
         }
 
         private void button2_Click(object sender, EventArgs e)
