@@ -38,9 +38,30 @@ namespace Projeto_BD
             }
             CN.Close();
         }
+        private void GetTeamGrid(string team,TeamGrid tgrid)
+        {
+            DataSet ds = new DataSet();            
+            try
+            {
+                CN.Open();
+                SqlCommand cmd = new SqlCommand("GetEquipa", CN);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Clube",team);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds);
+                tgrid.getGrid().DataSource = ds;
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                CN.Close();
+            }
+        }
         private void GetTeam(string teamName,TeamPage form)
         {
-
             CN.Open();
             SqlCommand sqlcmd = new SqlCommand("Select * from PROJETO.Jogador where clube=@club", CN);
             sqlcmd.Parameters.AddWithValue("@club", teamName);
@@ -126,9 +147,14 @@ namespace Projeto_BD
         {
             DataGridView dview = (DataGridView)sender;
             TeamPage Teamform = new TeamPage();
-            Debug.WriteLine(dview.SelectedCells.Count);
             GetTeam(dview.SelectedCells[0].Value.ToString(),Teamform);
             Teamform.ShowDialog();
+
+            // StoredProcedure
+            //TeamGrid tGrid = new TeamGrid();
+            //GetTeamGrid(dview.SelectedCells[0].Value.ToString(), tGrid);
+            //tGrid.ShowDialog();
+            
         }
     }
 }
