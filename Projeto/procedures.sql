@@ -2,7 +2,7 @@
 --Dado um clube devolve o Nome, Posicao e NrCamisola de todos os jogadores desse clube
 create procedure PROJETO.GetEquipa @Clube varchar(100)
 as
-	select j.NrFederacao,j.NrCamisola,j.Posicao,j.clube,p.Nome from
+	select j.NrCamisola,j.Posicao,j.clube,p.Nome from
 	PROJETO.Jogador j, PROJETO.Pessoa p
 	where j.clube=@Clube and j.NrFederacao= p.NrFederacao
 	order by j.Posicao;
