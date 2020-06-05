@@ -20,3 +20,6 @@ C:\Users\tomas\OneDrive\Ambiente de Trabalho\Universidade\BD\BD\Projeto\Projeto_
 C:\Users\tomas\OneDrive\Ambiente de Trabalho\Universidade\BD\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.csproj.CoreCompileInputs.cache
 C:\Users\tomas\OneDrive\Ambiente de Trabalho\Universidade\BD\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.exe
 C:\Users\tomas\OneDrive\Ambiente de Trabalho\Universidade\BD\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.pdb
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.TeamGrid.resources
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.TeamPage.resources
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.InfoJogo.resources

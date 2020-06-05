@@ -10,18 +10,19 @@ using System.Windows.Forms;
 
 namespace Projeto_BD
 {
-    public partial class TeamPage : Form
+    public partial class InfoJogo : Form
     {
-        public TeamPage()
+        public InfoJogo()
         {
             InitializeComponent();
         }
+
         public ListBox getList()
         {
             return this.listBox1;
         }
 
-        private void TeamPage_Load(object sender, EventArgs e)
+        private void InfoJogo_Load(object sender, EventArgs e)
         {
 
         }
