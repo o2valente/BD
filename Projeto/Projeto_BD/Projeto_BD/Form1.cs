@@ -31,21 +31,24 @@ namespace Projeto_BD
             SqlCommand sqlcmd = new SqlCommand("Select * from PROJETO.Jogo where NrJornada=@NrJornada", CN);
             sqlcmd.Parameters.AddWithValue("@NrJornada", nr);
             SqlDataReader reader = sqlcmd.ExecuteReader();
+            listBox1.Items.Clear();
             while (reader.Read())
             {
                 listBox1.Items.Add(reader["Clube1"] + " " + reader["Resultado1"] + " - " + reader["Resultado2"] + " " + reader["Clube2"]);
             }
             CN.Close();
         }
-        private void GetTeam(string teamName)
+        private void GetTeam(string teamName,TeamPage form)
         {
+
             CN.Open();
             SqlCommand sqlcmd = new SqlCommand("Select * from PROJETO.Jogador where clube=@club", CN);
             sqlcmd.Parameters.AddWithValue("@club", teamName);
             SqlDataReader reader = sqlcmd.ExecuteReader();
+            form.getList().Items.Clear();
             while (reader.Read())
             {
-                listBox1.Items.Add(reader["NrFederacao"] + " - " + reader["NrCamisola"] + " " + reader["Posicao"] + " " + reader["clube"]);
+                form.getList().Items.Add(reader["NrFederacao"] + " - " + reader["NrCamisola"] + " " + reader["Posicao"] + " " + reader["clube"]);
             }
             CN.Close();
         }
@@ -88,6 +91,7 @@ namespace Projeto_BD
             this.dataGridView1.Columns[4].Name = "Pontos";
             this.dataGridView1.Columns["Pontos"].ReadOnly = true;
 
+            this.dataGridView1.Rows.Clear();
             for (int i = 0; i < 26; i++)
             {
                 //dtbl.NewRow. = "Sporting Clube de Portugal " + i + " vitórias";
@@ -121,9 +125,10 @@ namespace Projeto_BD
         private void dataGridView1_DoubleClick(object sender, EventArgs e)
         {
             DataGridView dview = (DataGridView)sender;
-            
+            TeamPage Teamform = new TeamPage();
             Debug.WriteLine(dview.SelectedCells.Count);
-            GetTeam(dview.SelectedCells[0].Value.ToString());
+            GetTeam(dview.SelectedCells[0].Value.ToString(),Teamform);
+            Teamform.ShowDialog();
         }
     }
 }
