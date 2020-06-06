@@ -56,27 +56,29 @@ go
 
 create procedure PROJETO.ManagerHistory @nrFed int
 as
-	declare @tempTable table (Nome varchar(100),Clube varchar(100));
+	declare @tempTable table (Nome varchar(100),Clube varchar(100), dataSub date);
 	declare @name varchar(100) = (Select p.Nome from PROJETO.Pessoa p where p.NrFederacao = @nrFed);
 	declare @club varchar(100) = (Select t.ClubeTreinado from PROJETO.Treinador t where t.NrFederacao = @nrFed);
-	insert into @tempTable values(@name,@club);
+	declare @dataSub date;
+	insert into @tempTable values(@name,@club,@dataSub);
 	declare @entra varchar(100),@sai varchar(100), @clube varchar(100), @data date
+	set @data =  convert (date,@data)
 	DECLARE cur cursor FAST_FORWARD
-	for select s.TreinadorEntra,s.TreinadorSai,s.Clube
+	for select s.TreinadorEntra,s.TreinadorSai,s.Clube,s.DataSubstituicao
 	from PROJETO.TreinadorSubstitui s
 	open cur;
-	fetch cur into @entra,@sai,@clube;
+	fetch cur into @entra,@sai,@clube,@data;
 	WHILE @@FETCH_STATUS = 0
 		begin
 			if  @nrFed = @entra
 				begin
-					insert into @tempTable  values(@name, @clube);
+					insert into @tempTable  values(@name, @clube,@data);
 				end
 			else if  @nrFed = @sai
 				begin
-					insert into @tempTable  values(@name, @clube);
+					insert into @tempTable  values(@name, @clube,@data);
 				end
-			fetch cur into @entra,@sai,@clube;
+			fetch cur into @entra,@sai,@clube,@data;
 		end;
 	close cur;
 	deallocate cur;

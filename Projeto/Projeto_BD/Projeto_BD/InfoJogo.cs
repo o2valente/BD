@@ -15,11 +15,17 @@ namespace Projeto_BD
         public InfoJogo()
         {
             InitializeComponent();
+            
         }
 
         public ListBox getList()
         {
             return this.listBox1;
+        }
+
+        public System.Windows.Forms.Label getLabel()
+        {
+            return this.label1;
         }
 
         private void InfoJogo_Load(object sender, EventArgs e)

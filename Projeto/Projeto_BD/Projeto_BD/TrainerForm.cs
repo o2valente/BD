@@ -49,15 +49,39 @@ namespace Projeto_BD
             listBox2.Items.Clear();
             while (reader.Read())
             {
-                listBox2.Items.Add(reader["Nome"] + ":" + " " + reader["Clube"] + " ");
+                
+                if (reader["dataSub"] is null)
+                {
+                    
+                    listBox2.Items.Add(reader["Nome"] + ":" + " " + reader["Clube"] + " ");
+                }
+                else
+                {
+                    string[] data =  reader["dataSub"].ToString().Split(' ');
+                    listBox2.Items.Add(reader["Nome"] + ":" + " " + reader["Clube"] + " " + data[0]);
+                }
+                
             }
             CN.Close();
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            string sel = listBox1.SelectedItem.ToString();
-            string trainer = sel.Split(':')[0];
-            GetTrainerHistory(trainer);
+            if(listBox1.SelectedItem is null)
+            {
+                MessageBox.Show("Chosse a Coach!");
+            }
+            else
+            {
+                string sel = listBox1.SelectedItem.ToString();
+                string trainer = sel.Split(':')[0];
+                GetTrainerHistory(trainer);
+            }
+            
+        }
+
+        private void TrainerForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -54,6 +54,7 @@ namespace Projeto_BD
             cmd.Parameters.Add(new SqlParameter("@nr",nrJogo));
             CN.Close();
             InfoJogo info = new InfoJogo();
+            info.getLabel().Text = vals[1];
             GetInfoJogo(nrJogo,info);
             info.Show();
         }
@@ -67,6 +68,7 @@ namespace Projeto_BD
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
+                
                 form.getList().Items.Add("Arbitro Principal: "+reader["a"]);
                 form.getList().Items.Add("Arbitro Linha: " + reader["al1"]);
                 form.getList().Items.Add("Arbitro Linha: " + reader["al2"]);
@@ -77,17 +79,34 @@ namespace Projeto_BD
             CN.Close();
         }
 
-        private void GetTeam(string teamName, TeamPage form)
+        public void GetTeam(string teamName, TeamPage form)
         {
             CN.Open();
             SqlCommand sqlcmd = new SqlCommand("PROJETO.GetEquipa", CN);
             sqlcmd.CommandType = CommandType.StoredProcedure;
             sqlcmd.Parameters.Add(new SqlParameter("@Clube", teamName));
             SqlDataReader reader = sqlcmd.ExecuteReader();
-            form.getList().Items.Clear();
+            List<string[]> rows = new List<string[]>();
+            //form.getGrid().Columns.Clear();
+            //form.getList().Items.Clear();
+
             while (reader.Read())
             {
-                form.getList().Items.Add(reader["Nome"] + " - " + reader["NrCamisola"] + " " + reader["Posicao"] + " " + reader["clube"]);
+                string[] row = { reader["Nome"].ToString(), reader["NrCamisola"].ToString(), reader["Posicao"].ToString() };
+                rows.Add(row);
+
+                form.GetLabelNomeClube().Text = reader["clube"].ToString();
+            }
+
+            
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                //dtbl.NewRow. = "Sporting Clube de Portugal " + i + " vitórias";
+                form.getGrid().RowHeadersVisible = false;
+                string[] row = rows.ElementAt(i);
+                form.getGrid().Rows.Add(row);
+                
             }
             CN.Close();
         }
@@ -135,13 +154,15 @@ namespace Projeto_BD
             this.dataGridView1.Columns.Clear();
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.ColumnCount = 5;
+            //this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.ColumnCount = 7;
             this.dataGridView1.Columns[0].Width = 130;
             this.dataGridView1.Columns[1].Width = 50;
             this.dataGridView1.Columns[2].Width = 50;
             this.dataGridView1.Columns[3].Width = 50;
             this.dataGridView1.Columns[4].Width = 50;
+            this.dataGridView1.Columns[5].Width = 50;
+            this.dataGridView1.Columns[6].Width = 50;
             this.dataGridView1.Columns[0].Name = "Equipa";
             this.dataGridView1.Columns["Equipa"].ReadOnly = true;
             this.dataGridView1.Columns[1].Name = "Pontos";
@@ -152,7 +173,11 @@ namespace Projeto_BD
             this.dataGridView1.Columns["Derrotas"].ReadOnly = true;
             this.dataGridView1.Columns[4].Name = "Empates";
             this.dataGridView1.Columns["Empates"].ReadOnly = true;
-            
+            this.dataGridView1.Columns[5].Name = "GM";
+            this.dataGridView1.Columns["GM"].ReadOnly = true;
+            this.dataGridView1.Columns[6].Name = "GS";
+            this.dataGridView1.Columns["GS"].ReadOnly = true;
+
 
             this.dataGridView1.Rows.Clear();
 
@@ -165,7 +190,7 @@ namespace Projeto_BD
 
             while (reader.Read())
             {
-                string[] row = { reader["nome"].ToString(), reader["pontos"].ToString(), reader["vitorias"].ToString(), reader["derrotas"].ToString(), reader["empates"].ToString() };
+                string[] row = { reader["nome"].ToString(), reader["pontos"].ToString(), reader["vitorias"].ToString(), reader["derrotas"].ToString(), reader["empates"].ToString(),reader["gm"].ToString(), reader["gs"].ToString() };
                 rows.Add(row);
             }
 
@@ -176,7 +201,7 @@ namespace Projeto_BD
                 this.dataGridView1.RowHeadersVisible = false;
                 string[] row = rows.ElementAt(i);
                 int drow = this.dataGridView1.Rows.Add(row);
-                Debug.WriteLine(drow);
+                
             }
         }
 
@@ -190,6 +215,7 @@ namespace Projeto_BD
             Debug.WriteLine("ola");
             DataGridView dview = (DataGridView)sender;
             TeamPage Teamform = new TeamPage();
+            Teamform.gridInnit();
             GetTeam(dview.SelectedCells[0].Value.ToString(), Teamform);
             Teamform.ShowDialog();
         }

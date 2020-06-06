@@ -58,19 +58,20 @@
             this.listBox2.ItemHeight = 16;
             this.listBox2.Location = new System.Drawing.Point(458, 66);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(330, 372);
+            this.listBox2.Size = new System.Drawing.Size(404, 372);
             this.listBox2.TabIndex = 2;
             // 
             // TrainerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(904, 450);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Name = "TrainerForm";
             this.Text = "TrainerForm";
+            this.Load += new System.EventHandler(this.TrainerForm_Load);
             this.ResumeLayout(false);
 
         }

@@ -23,3 +23,4 @@ C:\Users\tomas\OneDrive\Ambiente de Trabalho\Universidade\BD\BD\Projeto\Projeto_
 C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.TeamGrid.resources
 C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.TeamPage.resources
 C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.InfoJogo.resources
+C:\Users\pmate\Documents\BD\Projeto\Projeto_BD\Projeto_BD\obj\Debug\Projeto_BD.TrainerForm.resources

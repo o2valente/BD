@@ -7,7 +7,7 @@ as
 	where j.clube=@Clube and j.NrFederacao= p.NrFederacao
 	order by j.Posicao;
 
---exec PROJETO.GetEquipa 'UD Mourisquense'
+--exec PROJETO.GetEquipa 'Sporting Clube de Fermentelos '
 --drop procedure PROJETO.GetEquipa
 
 --Dada uma posicao diz todos os jogadores que jogam nessa posicao e o seu clube
@@ -141,7 +141,7 @@ as
 
 
 --dado um numero de jogo devolve infos do jogo
-create procedure PROJETO.infoJogo @nr tinyint
+create procedure PROJETO.infoJogo @nr int
 as
 	declare @c1 varchar(100), @c2 varchar(100),@r1 int, @r2 int,
 	@nomes varchar(400),@estadio varchar(100),@espetadores int, @equipaArb tinyint,
