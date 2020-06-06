@@ -140,6 +140,18 @@ namespace Projeto_BD
                 form.getDirecao().Items.Add("Administrador: " + direcaoReader["admini"]);
             }
             CN.Close();
+
+            // ---------------------------- TROFÉUS -------------------------------------------------------------
+            CN.Open();
+            SqlCommand cmdTrofeu = new SqlCommand("PROJETO.TeamTitles", CN);
+            cmdTrofeu.CommandType = CommandType.StoredProcedure;
+            cmdTrofeu.Parameters.Add(new SqlParameter("@equipa", teamName));
+            SqlDataReader trofeuReader = cmdTrofeu.ExecuteReader();
+            while (trofeuReader.Read())
+            {
+                form.getTrofeu().Items.Add(trofeuReader["Ano"] + " - Campeão da liga");
+            }
+            CN.Close();
         }
 
         //private void GetTeamGrid(string team/*, TeamGrid tgrid*/)
@@ -280,7 +292,7 @@ namespace Projeto_BD
             tform.GetListBox().Items.Clear();
             while (reader.Read())
             {
-                tform.GetListBox().Items.Add(reader["Nome"] + ":" + " " + reader["ClubeTreinado"] + " " );
+                tform.GetListBox().Items.Add(reader["Nome"] + " | " + " " + reader["Clube"] + " | " + reader["Especializacao"]);
             }
             CN.Close();
         }

@@ -40,6 +40,11 @@ namespace Projeto_BD
             return this.listBox1;
         }
 
+        public System.Windows.Forms.ListBox getTrofeu()
+        {
+            return this.listBox2;
+        }
+
         public void gridInnit()
         {
             //this.dataGridView1.Rows.Clear();
@@ -62,6 +67,11 @@ namespace Projeto_BD
         private void TeamPage_Load(object sender, EventArgs e)
         {
             
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
 
         }
     }

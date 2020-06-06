@@ -73,7 +73,7 @@ namespace Projeto_BD
             else
             {
                 string sel = listBox1.SelectedItem.ToString();
-                string trainer = sel.Split(':')[0];
+                string trainer = sel.Split('|')[0];
                 GetTrainerHistory(trainer);
             }
             

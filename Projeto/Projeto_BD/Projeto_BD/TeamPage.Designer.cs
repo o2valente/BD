@@ -33,6 +33,8 @@
             this.nomeClube = new System.Windows.Forms.Label();
             this.labelEstadio = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,11 +84,32 @@
             this.listBox1.Size = new System.Drawing.Size(286, 100);
             this.listBox1.TabIndex = 6;
             // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 16;
+            this.listBox2.Location = new System.Drawing.Point(462, 193);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(286, 148);
+            this.listBox2.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(459, 173);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 17);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Troféus";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // TeamPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.labelEstadio);
             this.Controls.Add(this.nomeClube);
@@ -107,5 +130,7 @@
         private System.Windows.Forms.Label nomeClube;
         private System.Windows.Forms.Label labelEstadio;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Label label2;
     }
 }
