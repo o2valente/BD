@@ -79,6 +79,12 @@
     <Compile Include="TeamPage.Designer.cs">
       <DependentUpon>TeamPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TrainerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrainerForm.Designer.cs">
+      <DependentUpon>TrainerForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TeamPage.resx">
       <DependentUpon>TeamPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainerForm.resx">
+      <DependentUpon>TrainerForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

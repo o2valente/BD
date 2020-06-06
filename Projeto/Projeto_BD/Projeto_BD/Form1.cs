@@ -214,7 +214,26 @@ namespace Projeto_BD
             //tGrid.ShowDialog();
 
         }
+        private void GetTrainers(TrainerForm tform)
+        {
+            CN.Open();
+            SqlCommand cmd = new SqlCommand("PROJETO.GetTreinadores", CN);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = cmd.ExecuteReader();
+            tform.GetListBox().Items.Clear();
+            while (reader.Read())
+            {
+                tform.GetListBox().Items.Add(reader["Nome"] + ":" + " " + reader["ClubeTreinado"] + " " );
+            }
+            CN.Close();
+        }
 
-        
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TrainerForm tform = new TrainerForm();
+            GetTrainers(tform);
+            tform.ShowDialog();
+            
+        }
     }
 }
