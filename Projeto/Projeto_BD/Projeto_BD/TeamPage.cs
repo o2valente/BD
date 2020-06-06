@@ -30,6 +30,16 @@ namespace Projeto_BD
             return this.nomeClube;
         }
 
+        public System.Windows.Forms.Label getlabelEstadio()
+        {
+            return this.labelEstadio;
+        }
+
+        public System.Windows.Forms.ListBox getDirecao()
+        {
+            return this.listBox1;
+        }
+
         public void gridInnit()
         {
             //this.dataGridView1.Rows.Clear();

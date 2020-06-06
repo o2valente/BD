@@ -81,11 +81,13 @@ namespace Projeto_BD
 
         public void GetTeam(string teamName, TeamPage form)
         {
+            //-------------------------------------------------Jogadores---------------------------------------------------------
             CN.Open();
             SqlCommand sqlcmd = new SqlCommand("PROJETO.GetEquipa", CN);
             sqlcmd.CommandType = CommandType.StoredProcedure;
             sqlcmd.Parameters.Add(new SqlParameter("@Clube", teamName));
             SqlDataReader reader = sqlcmd.ExecuteReader();
+
             List<string[]> rows = new List<string[]>();
             //form.getGrid().Columns.Clear();
             //form.getList().Items.Clear();
@@ -107,6 +109,35 @@ namespace Projeto_BD
                 string[] row = rows.ElementAt(i);
                 form.getGrid().Rows.Add(row);
                 
+            }
+            CN.Close();
+
+            //-------------------------------------------------Estadio---------------------------------------------------------
+            string select_str = "SELECT PROJETO.getEstadioInfo('" + teamName + "')";
+            CN.Open();
+            
+            SqlCommand cmdEstadio = new SqlCommand(select_str, CN);
+            SqlDataReader estadioReader = cmdEstadio.ExecuteReader();
+            while (estadioReader.Read())
+            {
+                form.getlabelEstadio().Text = estadioReader[0].ToString();
+            }
+            CN.Close();
+
+
+            //-------------------------------------------------Direcao---------------------------------------------------------
+            CN.Open();
+            SqlCommand cmdDirecao = new SqlCommand("PROJETO.getDirecao",CN);
+            cmdDirecao.CommandType = CommandType.StoredProcedure;
+            cmdDirecao.Parameters.Add(new SqlParameter("@clube",teamName));
+            SqlDataReader direcaoReader = cmdDirecao.ExecuteReader();
+            while (direcaoReader.Read())
+            {
+                form.getDirecao().Items.Add("Presidente: " + direcaoReader["pres"]);
+                form.getDirecao().Items.Add("");
+                form.getDirecao().Items.Add("Pres. Ass. Geral: " + direcaoReader["presAss"]);
+                form.getDirecao().Items.Add("");
+                form.getDirecao().Items.Add("Administrador: " + direcaoReader["admini"]);
             }
             CN.Close();
         }

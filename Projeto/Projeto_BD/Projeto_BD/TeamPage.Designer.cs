@@ -31,6 +31,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.nomeClube = new System.Windows.Forms.Label();
+            this.labelEstadio = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,11 +64,31 @@
             this.nomeClube.TabIndex = 4;
             this.nomeClube.Text = "label2";
             // 
+            // labelEstadio
+            // 
+            this.labelEstadio.AutoSize = true;
+            this.labelEstadio.Location = new System.Drawing.Point(459, 25);
+            this.labelEstadio.Name = "labelEstadio";
+            this.labelEstadio.Size = new System.Drawing.Size(46, 17);
+            this.labelEstadio.TabIndex = 5;
+            this.labelEstadio.Text = "label2";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(462, 45);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(286, 100);
+            this.listBox1.TabIndex = 6;
+            // 
             // TeamPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 450);
+            this.ClientSize = new System.Drawing.Size(915, 450);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.labelEstadio);
             this.Controls.Add(this.nomeClube);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -83,5 +105,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label nomeClube;
+        private System.Windows.Forms.Label labelEstadio;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

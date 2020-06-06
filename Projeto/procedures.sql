@@ -165,5 +165,29 @@ as
 --exec PROJETO.infoJogo 1
 --drop procedure PROJETO.infoJogo
 
+--funcao que devolve uma string com nome do estadio e sua capacidade dado um clube
+create function PROJETO.getEstadioInfo(@clube varchar(100))
+returns varchar(300)
+begin
+	declare @info varchar(300);
+	set @info = 
+	concat(
+	(select e.Nome from PROJETO.Estadio e, PROJETO.Clube c where c.Nome=@clube and c.Estadio = e.Nome) 
+	, ' com capacidade para ' , 
+	(select e.Capacidade from PROJETO.Estadio e, PROJETO.Clube c where c.Nome=@clube and c.Estadio=e.Nome)
+	, ' espetadores');
+	return @info;
+end
 
+--drop function PROJETO.getEstadioInfo;
 
+create procedure PROJETO.getDirecao @clube varchar(100)
+as
+	declare @tempTable table(pres varchar(100),presAss varchar(100),admini varchar(100));
+	declare @pres varchar(100),@presAss varchar(100),@admini varchar(100);
+	set @pres = PROJETO.nomePessoa((select d.Presidente from PROJETO.Direcao d where d.nome_clube=@clube));
+	set @presAss = PROJETO.nomePessoa((select d.PresAssGeral from PROJETO.Direcao d where d.nome_clube=@clube));
+	set @admini = PROJETO.nomePessoa((select d.Administrador from PROJETO.Direcao d where d.nome_clube=@clube));
+	
+--drop procedure PROJETO.getDirecao
+--exec PROJETO.getDirecao 'CRAC'
