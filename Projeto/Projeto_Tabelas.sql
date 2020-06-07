@@ -166,13 +166,13 @@ create table PROJETO.TreinadorGuardaRedes(
 
 create table PROJETO.TreinadorSubstitui(
 	id				 int				not null,
-	TreinadorEntra	 int				not null,
-	TreinadorSai	 int				not null,
+	TreinadorEntra	 int				,
+	TreinadorSai	 int				,
 	Clube			 varchar(100)		not null,
 	DataSubstituicao date				not null,
 	primary key (id),
-	foreign key (TreinadorEntra) references PROJETO.TreinadorPrincipal(NrFederacao),	
-	foreign key (TreinadorSai) references PROJETO.TreinadorPrincipal(NrFederacao),	
+	foreign key (TreinadorEntra) references PROJETO.Treinador(NrFederacao),	
+	foreign key (TreinadorSai) references PROJETO.Treinador(NrFederacao),	
 	foreign key (Clube) references PROJETO.Clube(Nome),	
 );
 
