@@ -95,7 +95,7 @@ begin
 	deallocate cur;
 	return @trainerType;
 end;
---go
+go
 
 --SELECT PROJETO.GetTrainerType(502);
 --drop function PROJETO.GetTrainerType;
@@ -109,7 +109,7 @@ as
 	PROJETO.Epoca e , PROJETO.Vence v 
 	where v.ClubeVencedor = @equipa and v.AnoEpoca = e.Ano
 	order by e.Ano;
---GO
+GO
 
 --drop procedure PROJETO.TeamTitles;
 
@@ -154,7 +154,7 @@ as
 	close cur;
 	deallocate cur;
 	SELECT * from @tempTable
---GO
+GO
 
 --drop procedure PROJETO.ManagerHistory;
 --exec PROJETO.ManagerHistory @nrFed = 502
@@ -285,4 +285,57 @@ as
 	end catch	
 GO
 
+create procedure PROJETO.AddGame @nr int,@espetadores int, @estadio varchar(100),@jornada tinyint,@arbitragem tinyint,@clube1 varchar(100),@clube2 varchar(100),@res1 int,@res2 int
+as
+	declare @new_nr int;
+	begin try
+	begin transaction
+		set @new_nr = (SELECT TOP 1 j.NrJogo from PROJETO.Jogo j ORDER BY j.NrJogo DESC) + 1
+		INSERT INTO PROJETO.Jogo
+		VALUES (@nr,@espetadores,@estadio,@jornada,@arbitragem,@clube1,@clube2,@res1,@res2)
 
+		commit transaction
+	end try
+	begin catch
+		rollback transaction
+	end catch	
+GO
+
+create procedure PROJETO.FillGame @nr int,@espetadores int,@arbitragem tinyint,@res1 int,@res2 int
+as
+	declare @new_nr int;
+	begin try
+	begin transaction
+
+		UPDATE PROJETO.Jogo
+		SET NrEspetadores = @espetadores, EquipaArbitragem = @arbitragem, Resultado1 = @res1, Resultado2 = @res2
+		WHERE NrJogo = @nr
+
+		commit transaction
+	end try
+	begin catch
+		rollback transaction
+	end catch	
+GO
+
+create procedure PROJETO.GetTrainerName @equipa varchar(100)
+as
+	declare @tableTemp table(Nome varchar(100), Especializacao varchar(100));
+	declare @treinador int,@clubeT varchar(100);
+
+
+	set @tableTemp = (select * from PROJETO.GetTreinadores);
+--drop procedure PROJETO.AddPlayer
+----drop procedure PROJETO.Change_Trainer
+--drop procedure PROJETO.GetTeamTrainer
+--drop procedure PROJETO.TeamTitles
+--drop procedure PROJETO.GetClub
+--drop procedure PROJETO.getGolos
+--drop procedure PROJETO.getDirecao
+--drop procedure PROJETO.GetJornada
+--drop procedure PROJETO.GetEquipa
+--drop procedure PROJETO.GetTreinadores
+--drop procedure PROJETO.infoJogo
+--drop procedure PROJETO.ManagerHistory
+--drop procedure PROJETO.TabelaClass
+--drop procedure PROJETO.TCpontos
