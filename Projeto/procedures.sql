@@ -206,5 +206,37 @@ as
 	insert into @tempTable values (@pres,@presAss,@admini)
 	select * from @tempTable;
 	
+	
 --drop procedure PROJETO.getDirecao
 --exec PROJETO.getDirecao 'CRAC'
+
+create procedure PROJETO.NomeTreinadores
+as
+	declare @tableTemp table(Nome varchar(100));
+	declare @treinador int;
+	DECLARE cur cursor FAST_FORWARD
+	for select t.NrFederacao
+	from PROJETO.TreinadorPrincipal t
+	open cur;
+	fetch cur into @treinador;
+	begin try
+	begin transaction
+	WHILE @@FETCH_STATUS = 0
+		begin
+			declare @name varchar(100);
+			set @name = (PROJETO.nomePessoa(@treinador));
+			INSERT into @tableTemp values(@name);
+			fetch cur into @treinador
+		end;
+		commit transaction
+	end try
+	begin catch
+		rollback transaction
+	end catch
+	close cur;
+	deallocate cur;
+	select * from @tableTemp order by Nome;
+
+	
+exec PROJETO.NomeTreinadores
+drop procedure PROJETO.Nometreinadores

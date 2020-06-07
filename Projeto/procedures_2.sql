@@ -1,5 +1,5 @@
 
--- Dado um ano, retorna o vencedor dessa época
+-- Dado um ano, retorna o vencedor dessa ï¿½poca
 
 --create function PROJETO.GetWinner(@year smallint)
 --returns varchar(100)
@@ -17,7 +17,7 @@
 
 
 
--- Dado um nome, retorna o nr de federaçao
+-- Dado um nome, retorna o nr de federaï¿½ao
 
 --create function PROJETO.GetNrFed(@name varchar(100))
 --returns varchar(100)
@@ -236,6 +236,8 @@ as
 	deallocate cur;
 	select * from @tableTemp;
 
+	--drop procedure PROJETO.GetTeamTrainer
+
 ---- Troca 1 treinador de uma equipa, por outro treinador
 create procedure PROJETO.Change_Trainer @equipa varchar (100),@new_trainer varchar(100), @old_trainer varchar(100)
 as
@@ -264,6 +266,7 @@ as
 	end catch
 GO
 
+--drop procedure PROJETO.Change_Trainer
 
 -- Adiciona um jogador a uma equipa
 create procedure PROJETO.AddPlayer @nome varchar (100),@camisola tinyint, @posicao varchar(50),@equipa varchar(100)

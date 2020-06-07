@@ -16,11 +16,15 @@ namespace Projeto_BD
     public partial class TeamPage : Form
     {
         static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
+        //static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p2g4" + "; uid = " + "p2g4" + ";" + "password = " + "RV{'a~SyES>8_gy[");
+        //static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
         String team;
         public TeamPage()
         {
             InitializeComponent();
-            
+            FillDropDownList();
+
+
         }
        
         public void setTeam(String _team)
@@ -84,12 +88,12 @@ namespace Projeto_BD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.textBox1.Text == null || this.textBox2.Text == null)
+            if (this.comboBox1.SelectedItem.ToString() == null || this.comboBox2.SelectedItem.ToString() == null)
             {
                 return;
             }
-            string new_trainer = this.textBox1.Text;
-            string old_trainer = this.textBox2.Text;
+            string new_trainer = this.comboBox2.SelectedItem.ToString();
+            string old_trainer = this.comboBox1.SelectedItem.ToString();
 
             changeTrainer(old_trainer,new_trainer);
             Form1 form = new Form1();
@@ -136,17 +140,39 @@ namespace Projeto_BD
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (this.textBox3.Text == null || this.textBox4.Text == null || this.textBox5.Text == null)
+            if (this.textBox3.Text == null || this.comboBox3.SelectedItem.ToString() == null || this.textBox5.Text == null)
             {
                 return;
             }
             string name = this.textBox5.Text.ToString();
             int shirt_num = Int32.Parse(this.textBox3.Text.ToString());
-            string role = this.textBox4.Text.ToString();
+            string role = this.comboBox3.SelectedItem.ToString();
 
             addPlayer(name,shirt_num,role);
             Form1 form = new Form1();
             form.GetTeam(team, this);
+        }
+
+        private void FillDropDownList()
+        {
+            CN.Open();
+            SqlCommand cmd = new SqlCommand("PROJETO.NomeTreinadores",CN);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                //------------Antigo Treinador--------
+                comboBox1.Items.Add(reader["Nome"]);
+                //------------Novo treinador----------
+                comboBox2.Items.Add(reader["Nome"]);
+            }
+            CN.Close();
+
+            //----------------Posição------------------
+            string[] posicao = { "Atacante", "Medio","Defesa","GuardaRedes" };
+            comboBox3.Items.AddRange(posicao);
+
+
         }
     }
 }
