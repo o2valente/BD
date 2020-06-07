@@ -53,6 +53,8 @@ as
 	from PROJETO.Jogo j
 	open c;
 	fetch c into @clube1, @clube2,@resultado1,@resultado2;
+	begin try
+	begin transaction
 	WHILE @@FETCH_STATUS = 0
 		begin
 			if @nome = @clube1
@@ -69,6 +71,11 @@ as
 			fetch c into  @clube1, @clube2,@resultado1,@resultado2;
 				
 		end
+		commit transaction
+	end try
+	begin catch
+		rollback transaction
+	end catch
 	close c;
 	deallocate c;
 	insert into @tempTable values(@nome,@gm,@gs);
@@ -79,7 +86,7 @@ as
 	
 
 
---Retorna a tabela de classficcação
+--Retorna a tabela de classficcaï¿½ï¿½o
 create procedure PROJETO.TabelaClass 
 as
 	declare @Pontos int =0;
@@ -93,14 +100,21 @@ as
 	from PROJETO.Clube c
 	open cur;
 	fetch cur into @nome,@vitorias,@derrotas,@empates;
-	WHILE @@FETCH_STATUS = 0
-		begin
-			exec @temp = PROJETO.TCpontos @nome
-			select @pontos =  @temp
-			insert into @golosTable exec PROJETO.getGolos @nome;
-			insert into @tempTable  values(@nome, @pontos , @vitorias , @derrotas , @empates);
-			fetch cur into @nome,@vitorias,@derrotas,@empates;
-		end;
+	begin try
+	begin transaction
+		WHILE @@FETCH_STATUS = 0
+			begin
+				exec @temp = PROJETO.TCpontos @nome
+				select @pontos =  @temp
+				insert into @golosTable exec PROJETO.getGolos @nome;
+				insert into @tempTable  values(@nome, @pontos , @vitorias , @derrotas , @empates);
+				fetch cur into @nome,@vitorias,@derrotas,@empates;
+			end;
+			commit transaction
+	end try
+	begin catch
+		rollback transaction
+	end catch
 	close cur;
 	deallocate cur;
 	select t.nome,t.pontos,t.vitorias,t.derrotas,t.empates,g.gm,g.gs from @tempTable t join @golosTable g on t.nome=g.nome
