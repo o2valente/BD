@@ -203,8 +203,8 @@ as
 	set @presAss = PROJETO.nomePessoa((select d.PresAssGeral from PROJETO.Direcao d where d.nome_clube=@clube));
 	set @admini = PROJETO.nomePessoa((select d.Administrador from PROJETO.Direcao d where d.nome_clube=@clube));
 
-	insert into @tempTable
-	values (@pres,@presAss,@admini)
+	insert into @tempTable values (@pres,@presAss,@admini)
+	select * from @tempTable;
 	
 --drop procedure PROJETO.getDirecao
 --exec PROJETO.getDirecao 'CRAC'
