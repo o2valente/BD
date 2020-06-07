@@ -288,14 +288,14 @@ as
 	end catch	
 GO
 
-create procedure PROJETO.AddGame @nr int,@espetadores int, @estadio varchar(100),@jornada tinyint,@arbitragem tinyint,@clube1 varchar(100),@clube2 varchar(100),@res1 int,@res2 int
+create procedure PROJETO.AddGame @espetadores int, @estadio varchar(100),@jornada tinyint,@arbitragem tinyint,@clube1 varchar(100),@clube2 varchar(100),@res1 int,@res2 int
 as
 	declare @new_nr int;
 	begin try
 	begin transaction
 		set @new_nr = (SELECT TOP 1 j.NrJogo from PROJETO.Jogo j ORDER BY j.NrJogo DESC) + 1
 		INSERT INTO PROJETO.Jogo
-		VALUES (@nr,@espetadores,@estadio,@jornada,@arbitragem,@clube1,@clube2,@res1,@res2)
+		VALUES (@new_nr,@espetadores,@estadio,@jornada,@arbitragem,@clube1,@clube2,@res1,@res2)
 
 		commit transaction
 	end try

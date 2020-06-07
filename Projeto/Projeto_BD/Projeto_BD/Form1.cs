@@ -59,13 +59,15 @@ namespace Projeto_BD
             info.Show();
         }
 
-        private void GetInfoJogo(int nrJogo,InfoJogo form)
+        public void GetInfoJogo(int nrJogo,InfoJogo form)
         {
+            form.setNumber(nrJogo);
             CN.Open();
             SqlCommand cmd = new SqlCommand("PROJETO.infoJogo",CN);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@nr",nrJogo));
             SqlDataReader reader = cmd.ExecuteReader();
+            form.getList().Items.Clear();
             while (reader.Read())
             {
                 

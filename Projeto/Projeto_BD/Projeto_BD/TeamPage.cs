@@ -88,13 +88,22 @@ namespace Projeto_BD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.comboBox1.SelectedItem.ToString() == null || this.comboBox2.SelectedItem.ToString() == null)
+            if (this.comboBox2.SelectedItem == null && this.comboBox1.SelectedItem == null)
             {
                 return;
             }
-            string new_trainer = this.comboBox2.SelectedItem.ToString();
-            string old_trainer = this.comboBox1.SelectedItem.ToString();
+            string old_trainer = null;
+            string new_trainer = null;
 
+            if (this.comboBox1.SelectedItem != null)
+            {
+                old_trainer = this.comboBox1.SelectedItem.ToString();
+            }
+            if (this.comboBox2.SelectedItem != null)
+            {
+                new_trainer = this.comboBox2.SelectedItem.ToString();
+            }
+            
             changeTrainer(old_trainer,new_trainer);
             Form1 form = new Form1();
             form.GetTeam(team,this);
@@ -109,8 +118,25 @@ namespace Projeto_BD
             SqlCommand cmd = new SqlCommand("PROJETO.Change_Trainer", CN);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@equipa", team));
-            cmd.Parameters.Add(new SqlParameter("@new_trainer", new_trainer));
-            cmd.Parameters.Add(new SqlParameter("@old_trainer", old_trainer));
+            
+            if (new_trainer == null)
+            {
+                cmd.Parameters.Add(new SqlParameter("@new_trainer", "NULL"));
+            }
+            else
+            {
+                cmd.Parameters.Add(new SqlParameter("@new_trainer", new_trainer));
+            }
+
+            if (old_trainer == null)
+            {
+                cmd.Parameters.Add(new SqlParameter("@old_trainer", "NULL"));
+            }
+            else
+            {
+                cmd.Parameters.Add(new SqlParameter("@old_trainer", old_trainer));
+            }
+            
             SqlDataReader reader = cmd.ExecuteReader();
             CN.Close();
         }
@@ -140,7 +166,7 @@ namespace Projeto_BD
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (this.textBox3.Text == null || this.comboBox3.SelectedItem.ToString() == null || this.textBox5.Text == null)
+            if (this.textBox3.Text == null || this.comboBox3.SelectedItem == null || this.textBox5.Text == null)
             {
                 return;
             }
@@ -169,7 +195,7 @@ namespace Projeto_BD
             CN.Close();
 
             //----------------Posição------------------
-            string[] posicao = { "Atacante", "Medio","Defesa","GuardaRedes" };
+            string[] posicao = { "Atacante", "Medio","Defesa","Guarda-Redes" };
             comboBox3.Items.AddRange(posicao);
 
 

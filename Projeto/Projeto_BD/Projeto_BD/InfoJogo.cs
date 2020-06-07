@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,19 @@ namespace Projeto_BD
 {
     public partial class InfoJogo : Form
     {
+        static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
+
+        private int game_number;
         public InfoJogo()
         {
             InitializeComponent();
             
         }
 
+        public void setNumber(int _num)
+        {
+            game_number = _num;
+        }
         public ListBox getList()
         {
             return this.listBox1;
@@ -36,6 +44,41 @@ namespace Projeto_BD
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateGame(int _spectators,int _arbitro,int _gol1, int _gol2)
+        {
+            CN.Open();
+            SqlCommand cmd = new SqlCommand("PROJETO.FillGame", CN);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@nr", game_number));
+            cmd.Parameters.Add(new SqlParameter("@espetadores", _spectators));
+            cmd.Parameters.Add(new SqlParameter("@arbitragem", _arbitro));
+            cmd.Parameters.Add(new SqlParameter("@res1", _gol1));
+            cmd.Parameters.Add(new SqlParameter("@res2", _gol2));
+            SqlDataReader reader = cmd.ExecuteReader();
+            Form1 form = new Form1();
+            form.GetInfoJogo(game_number,this);
+            CN.Close();
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (this.textBox1.Text == null || this.textBox2.Text == null || this.textBox3.Text == null || this.textBox4.Text == null)
+            {
+                return;
+            }
+
+            int spectators = Int32.Parse(this.textBox2.Text.ToString());
+            int arbitro = Int32.Parse(this.textBox1.Text.ToString());
+            int gol1 = Int32.Parse(this.textBox3.Text.ToString());
+            int gol2 = Int32.Parse(this.textBox4.Text.ToString());
+
+            UpdateGame(spectators,arbitro,gol1,gol2);
         }
     }
 }

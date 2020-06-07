@@ -78,7 +78,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(33, 21);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(169, 34);
+            this.button2.Size = new System.Drawing.Size(148, 34);
             this.button2.TabIndex = 4;
             this.button2.Text = "Tabela Classificação";
             this.button2.UseVisualStyleBackColor = true;
@@ -99,9 +99,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(498, 21);
+            this.button3.Location = new System.Drawing.Point(352, 21);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(141, 34);
+            this.button3.Size = new System.Drawing.Size(90, 34);
             this.button3.TabIndex = 6;
             this.button3.Text = "Coach List";
             this.button3.UseVisualStyleBackColor = true;
