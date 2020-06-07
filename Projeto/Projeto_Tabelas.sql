@@ -71,14 +71,14 @@ create table PROJETO.Jornada(
 
 create table PROJETO.Jogo(
 	NrJogo			int				not null, --tinhamos como pk NrJornada
-	NrEspetadores	int				not null,
+	NrEspetadores	int				,
 	Estadio			varchar(100)	not null,
 	NrJornada		tinyint			not null,
-	EquipaArbitragem tinyint 		not null,
+	EquipaArbitragem tinyint 		,
 	Clube1			varchar(100)	not null,
 	Clube2			varchar(100)	not null,
-	Resultado1		int				not null,
-	Resultado2		int				not null,
+	Resultado1		int				,
+	Resultado2		int				,
 	primary key (NrJogo),
 	foreign key (Estadio)		references PROJETO.Estadio(Nome),
 	foreign key (NrJornada)		references PROJETO.Jornada(NrJornada),
@@ -179,3 +179,5 @@ create table PROJETO.TreinadorSubstitui(
 ALTER TABLE PROJETO.Jogo ADD FOREIGN KEY(EquipaArbitragem) REFERENCES PROJETO.EquipaArbitragem (ID);
 
 drop table PROJETO.TreinadorSubstitui
+
+drop table PROJETO.Jogo
