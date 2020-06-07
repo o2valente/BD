@@ -92,6 +92,8 @@ namespace Projeto_BD
             string old_trainer = this.textBox2.Text;
 
             changeTrainer(old_trainer,new_trainer);
+            Form1 form = new Form1();
+            form.GetTeam(team,this);
         }
 
         private void changeTrainer(string old_trainer,string new_trainer)
@@ -143,6 +145,8 @@ namespace Projeto_BD
             string role = this.textBox4.Text.ToString();
 
             addPlayer(name,shirt_num,role);
+            Form1 form = new Form1();
+            form.GetTeam(team, this);
         }
     }
 }
