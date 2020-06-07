@@ -87,7 +87,7 @@ namespace Projeto_BD
             sqlcmd.CommandType = CommandType.StoredProcedure;
             sqlcmd.Parameters.Add(new SqlParameter("@Clube", teamName));
             SqlDataReader reader = sqlcmd.ExecuteReader();
-
+            form.setTeam(teamName);
             List<string[]> rows = new List<string[]>();
             //form.getGrid().Columns.Clear();
             //form.getList().Items.Clear();
@@ -138,6 +138,19 @@ namespace Projeto_BD
                 form.getDirecao().Items.Add("Pres. Ass. Geral: " + direcaoReader["presAss"]);
                 form.getDirecao().Items.Add("");
                 form.getDirecao().Items.Add("Administrador: " + direcaoReader["admini"]);
+                form.getDirecao().Items.Add("");
+            }
+            CN.Close();
+            //-------------------------------------------------Treinadores---------------------------------------------------------
+            CN.Open();
+            SqlCommand cmdTrainers = new SqlCommand("PROJETO.GetTeamTrainer", CN);
+            cmdTrainers.CommandType = CommandType.StoredProcedure;
+            cmdTrainers.Parameters.Add(new SqlParameter("@equipa", teamName));
+            SqlDataReader TReader = cmdTrainers.ExecuteReader();
+            while (TReader.Read())
+            {
+                form.getDirecao().Items.Add(TReader["Especializacao"] + ": " + TReader["Nome"]);
+                form.getDirecao().Items.Add("");
             }
             CN.Close();
 

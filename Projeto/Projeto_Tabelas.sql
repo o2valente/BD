@@ -165,14 +165,17 @@ create table PROJETO.TreinadorGuardaRedes(
 );
 
 create table PROJETO.TreinadorSubstitui(
-	TreinadorEntra	 int	  unique	not null,
-	TreinadorSai	 int	  unique	not null,
+	id				 int				not null,
+	TreinadorEntra	 int				not null,
+	TreinadorSai	 int				not null,
 	Clube			 varchar(100)		not null,
 	DataSubstituicao date				not null,
-	primary key (TreinadorEntra,TreinadorSai),
+	primary key (id),
 	foreign key (TreinadorEntra) references PROJETO.TreinadorPrincipal(NrFederacao),	
 	foreign key (TreinadorSai) references PROJETO.TreinadorPrincipal(NrFederacao),	
 	foreign key (Clube) references PROJETO.Clube(Nome),	
 );
 
 ALTER TABLE PROJETO.Jogo ADD FOREIGN KEY(EquipaArbitragem) REFERENCES PROJETO.EquipaArbitragem (ID);
+
+drop table PROJETO.TreinadorSubstitui
