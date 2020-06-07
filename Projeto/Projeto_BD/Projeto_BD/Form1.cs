@@ -89,8 +89,7 @@ namespace Projeto_BD
             SqlDataReader reader = sqlcmd.ExecuteReader();
             form.setTeam(teamName);
             List<string[]> rows = new List<string[]>();
-            //form.getGrid().Columns.Clear();
-            //form.getList().Items.Clear();
+            form.getGrid().Rows.Clear();
 
             while (reader.Read())
             {
@@ -131,6 +130,7 @@ namespace Projeto_BD
             cmdDirecao.CommandType = CommandType.StoredProcedure;
             cmdDirecao.Parameters.Add(new SqlParameter("@clube",teamName));
             SqlDataReader direcaoReader = cmdDirecao.ExecuteReader();
+            form.getDirecao().Items.Clear();
             while (direcaoReader.Read())
             {
                 form.getDirecao().Items.Add("Presidente: " + direcaoReader["pres"]);
@@ -160,6 +160,7 @@ namespace Projeto_BD
             cmdTrofeu.CommandType = CommandType.StoredProcedure;
             cmdTrofeu.Parameters.Add(new SqlParameter("@equipa", teamName));
             SqlDataReader trofeuReader = cmdTrofeu.ExecuteReader();
+            form.getTrofeu().Items.Clear();
             while (trofeuReader.Read())
             {
                 form.getTrofeu().Items.Add(trofeuReader["Ano"] + " - Campeão da liga");
