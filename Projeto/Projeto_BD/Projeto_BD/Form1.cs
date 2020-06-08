@@ -325,7 +325,6 @@ namespace Projeto_BD
             TrainerForm tform = new TrainerForm();
             GetTrainers(tform);
             tform.ShowDialog();
-            
         }
 
         private void button4_Click(object sender, EventArgs e)

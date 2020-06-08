@@ -52,7 +52,7 @@ namespace Projeto_BD
             }
 
             int spectators = Int32.Parse(this.textBox1.Text.ToString());
-            int arbitro = Int32.Parse(this.comboBox2.SelectedItem.ToString());
+            int arbitro = Int32.Parse(this.comboBox5.SelectedItem.ToString());
             int gol1 = Int32.Parse(this.textBox6.Text.ToString());
             int gol2 = Int32.Parse(this.textBox7.Text.ToString());
             string stadium = this.comboBox1.SelectedItem.ToString();
@@ -65,6 +65,7 @@ namespace Projeto_BD
 
         private void FillDropDowns()
         {
+
             //------------Estadios---------------
             CN.Open();
             SqlCommand estadioCmd = new SqlCommand("select * from PROJETO.getNomeEstadio", CN);
@@ -91,6 +92,15 @@ namespace Projeto_BD
             {
                 comboBox3.Items.Add(clubesReader["Nome"]);
                 comboBox4.Items.Add(clubesReader["Nome"]);
+            }
+            CN.Close();
+            //-------------Equipa Arbitragem--------------
+            CN.Open();
+            SqlCommand arbCmd = new SqlCommand("select * from PROJETO.getIDea", CN);
+            SqlDataReader arbReader = arbCmd.ExecuteReader();
+            while (arbReader.Read())
+            {
+                comboBox5.Items.Add(arbReader["ID"]);
             }
             CN.Close();
 

@@ -41,7 +41,7 @@ namespace Projeto_BD
             {
                 team = comboBox4.SelectedItem.ToString();
             }
-            
+            FillOldTrainerDownList();
         }
 
         private void MercadoTransf_Load(object sender, EventArgs e)
@@ -78,10 +78,12 @@ namespace Projeto_BD
 
         private void changeTrainer(string old_trainer, string new_trainer)
         {
+            comboBox1.Text = "";
+            comboBox2.Text = "";
             //Debug.WriteLine(team);
             //Debug.WriteLine(old_trainer);
             //Debug.WriteLine(new_trainer);
-            setTeam(); //define a equipa
+            
             CN.Open();
             SqlCommand cmd = new SqlCommand("PROJETO.Change_Trainer", CN);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -107,6 +109,7 @@ namespace Projeto_BD
 
             SqlDataReader reader = cmd.ExecuteReader();
             CN.Close();
+            setTeam(); //define a equipa
         }
 
         private void addPlayer(string name, int num, string role)
@@ -123,8 +126,35 @@ namespace Projeto_BD
             CN.Close();
         }
 
+        private void FillOldTrainerDownList()
+        {
+
+            CN.Open();
+
+            SqlCommand cmd_2 = new SqlCommand("PROJETO.GetTeamTrainer", CN);
+            cmd_2.CommandType = CommandType.StoredProcedure;
+            cmd_2.Parameters.Add(new SqlParameter("@equipa", team));
+            SqlDataReader reader_2 = cmd_2.ExecuteReader();
+            comboBox1.Items.Clear();
+            while (reader_2.Read())
+            {
+
+                //------------Novo treinador----------
+                comboBox1.Items.Add(reader_2["Nome"]);
+            }
+            CN.Close();
+        }
+
         private void FillDropDownList()
         {
+            //------------DropDowns Não Editaveis e com Elemento Null--------
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.Items.Add("");
+            comboBox2.Items.Add("");
+
             CN.Open();
             SqlCommand cmd = new SqlCommand("PROJETO.NomeTreinadores", CN);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -132,8 +162,6 @@ namespace Projeto_BD
             while (reader.Read())
             {
                 //------------Antigo Treinador--------
-                comboBox1.Items.Add(reader["Nome"]);
-                //------------Novo treinador----------
                 comboBox2.Items.Add(reader["Nome"]);
             }
             CN.Close();
@@ -170,6 +198,14 @@ namespace Projeto_BD
             //form.GetTeam(team, tp);
         }
 
-        
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            setTeam();
+        }
     }
 }
