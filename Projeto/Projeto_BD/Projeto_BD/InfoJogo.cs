@@ -19,6 +19,7 @@ namespace Projeto_BD
         public InfoJogo()
         {
             InitializeComponent();
+            FillDropDown();
             
         }
 
@@ -68,17 +69,29 @@ namespace Projeto_BD
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.textBox1.Text == null || this.textBox2.Text == null || this.textBox3.Text == null || this.textBox4.Text == null)
+            if (this.comboBox1.SelectedItem == null || this.textBox2.Text == null || this.textBox3.Text == null || this.textBox4.Text == null)
             {
                 return;
             }
 
             int spectators = Int32.Parse(this.textBox2.Text.ToString());
-            int arbitro = Int32.Parse(this.textBox1.Text.ToString());
+            int arbitro = Int32.Parse(this.comboBox1.SelectedItem.ToString());
             int gol1 = Int32.Parse(this.textBox3.Text.ToString());
             int gol2 = Int32.Parse(this.textBox4.Text.ToString());
 
             UpdateGame(spectators,arbitro,gol1,gol2);
+        }
+
+        private void FillDropDown()
+        {
+            CN.Open();
+            SqlCommand cmd = new SqlCommand("select * from PROJETO.getIDea",CN);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                comboBox1.Items.Add(reader["ID"]);
+            }
+            CN.Close();
         }
     }
 }

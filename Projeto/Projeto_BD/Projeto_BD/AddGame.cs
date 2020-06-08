@@ -19,6 +19,7 @@ namespace Projeto_BD
         public AddGame()
         {
             InitializeComponent();
+            FillDropDowns();
         }
 
         public void setForm1(Form1 _f1)
@@ -62,5 +63,42 @@ namespace Projeto_BD
             Add_Game(spectators,stadium,jornada, arbitro, gol1, gol2,club1,club2);
         }
 
+        private void FillDropDowns()
+        {
+            //------------Estadios---------------
+            CN.Open();
+            SqlCommand estadioCmd = new SqlCommand("select * from PROJETO.getNomeEstadio", CN);
+            SqlDataReader estadiosReader = estadioCmd.ExecuteReader();
+            while (estadiosReader.Read())
+            {
+                comboBox1.Items.Add(estadiosReader["Nome"]);
+            }
+            CN.Close();
+            //------------NrJornada---------------
+            CN.Open();
+            SqlCommand jornadaCmd = new SqlCommand("select * from PROJETO.getNrJornada", CN);
+            SqlDataReader jornadaReader = jornadaCmd.ExecuteReader();
+            while (jornadaReader.Read())
+            {
+                comboBox2.Items.Add(jornadaReader["NrJornada"]);
+            }
+            CN.Close();
+            //-------------Nome Clubes--------------
+            CN.Open();
+            SqlCommand clubesCmd = new SqlCommand("select * from PROJETO.getNomesClube", CN);
+            SqlDataReader clubesReader = clubesCmd.ExecuteReader();
+            while (clubesReader.Read())
+            {
+                comboBox3.Items.Add(clubesReader["Nome"]);
+                comboBox4.Items.Add(clubesReader["Nome"]);
+            }
+            CN.Close();
+
+        }
+
+        private void AddGame_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
