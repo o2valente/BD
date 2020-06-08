@@ -26,6 +26,10 @@ namespace Projeto_BD
             InitializeComponent();
         }
 
+        public int getJr()
+        {
+            return j_nr;
+        }
         public void GetJornada(int nr)
         {
             CN.Open();
@@ -319,6 +323,13 @@ namespace Projeto_BD
             GetTrainers(tform);
             tform.ShowDialog();
             
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AddGame ag = new AddGame();
+            ag.setForm1(this);
+            ag.Show();
         }
     }
 }
