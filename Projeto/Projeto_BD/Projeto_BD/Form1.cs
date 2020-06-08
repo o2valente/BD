@@ -24,6 +24,7 @@ namespace Projeto_BD
         public Form1()
         {
             InitializeComponent();
+            innitTabelaClass();
         }
 
         public int getJr()
@@ -208,7 +209,7 @@ namespace Projeto_BD
             GetJornada(j_nr);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void innitTabelaClass()
         {
             //this.Hide();
             //Form goTabela = new TabelaClassificacao();
@@ -245,7 +246,7 @@ namespace Projeto_BD
             this.dataGridView1.Rows.Clear();
 
             CN.Open();
-            SqlCommand cmd = new SqlCommand("PROJETO.TabelaClass",CN);
+            SqlCommand cmd = new SqlCommand("PROJETO.TabelaClass", CN);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -253,7 +254,7 @@ namespace Projeto_BD
 
             while (reader.Read())
             {
-                string[] row = { reader["nome"].ToString(), reader["pontos"].ToString(), reader["vitorias"].ToString(), reader["derrotas"].ToString(), reader["empates"].ToString(),reader["gm"].ToString(), reader["gs"].ToString() };
+                string[] row = { reader["nome"].ToString(), reader["pontos"].ToString(), reader["vitorias"].ToString(), reader["derrotas"].ToString(), reader["empates"].ToString(), reader["gm"].ToString(), reader["gs"].ToString() };
                 rows.Add(row);
             }
 
@@ -263,10 +264,12 @@ namespace Projeto_BD
                 //dtbl.NewRow. = "Sporting Clube de Portugal " + i + " vitórias";
                 this.dataGridView1.RowHeadersVisible = false;
                 string[] row = rows.ElementAt(i);
-                int drow = this.dataGridView1.Rows.Add(row);
-                
+                /*int drow = */this.dataGridView1.Rows.Add(row);
+
             }
         }
+
+       
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -330,6 +333,13 @@ namespace Projeto_BD
             AddGame ag = new AddGame();
             ag.setForm1(this);
             ag.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MercadoTransf mt = new MercadoTransf();
+            mt.setForm1(this);
+            mt.Show();
         }
     }
 }

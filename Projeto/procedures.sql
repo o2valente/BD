@@ -266,3 +266,4 @@ as
 	select C.Nome from PROJETO.Clube C;
 
 --drop view PROJETO.getNomesClube;
+

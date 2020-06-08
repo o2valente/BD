@@ -21,7 +21,7 @@ namespace Projeto_BD
             InitializeComponent();
             FillDropDowns();
         }
-
+        
         public void setForm1(Form1 _f1)
         {
             f1 = _f1;
@@ -46,19 +46,19 @@ namespace Projeto_BD
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.textBox1.Text == null || this.textBox2.Text == null || this.textBox3.Text == null || this.textBox4.Text == null || this.textBox5.Text == null || this.textBox6.Text == null || this.textBox7.Text == null || this.textBox8.Text == null)
+            if (this.textBox1.Text == null || this.comboBox1.SelectedItem == null || this.comboBox2.SelectedItem == null || this.comboBox3.SelectedItem == null || this.comboBox4.SelectedItem == null || this.textBox6.Text == null || this.textBox7.Text == null )
             {
                 return;
             }
 
             int spectators = Int32.Parse(this.textBox1.Text.ToString());
-            int arbitro = Int32.Parse(this.textBox4.Text.ToString());
+            int arbitro = Int32.Parse(this.comboBox2.SelectedItem.ToString());
             int gol1 = Int32.Parse(this.textBox6.Text.ToString());
             int gol2 = Int32.Parse(this.textBox7.Text.ToString());
-            string stadium = this.textBox2.Text.ToString();
-            int jornada = Int32.Parse(this.textBox3.Text.ToString());
-            string club1 = this.textBox5.Text.ToString();
-            string club2 = this.textBox8.Text.ToString();
+            string stadium = this.comboBox1.SelectedItem.ToString();
+            int jornada = Int32.Parse(this.comboBox2.SelectedItem.ToString());
+            string club1 = this.comboBox3.SelectedItem.ToString();
+            string club2 = this.comboBox4.SelectedItem.ToString();
 
             Add_Game(spectators,stadium,jornada, arbitro, gol1, gol2,club1,club2);
         }

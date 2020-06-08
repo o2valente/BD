@@ -22,9 +22,6 @@ namespace Projeto_BD
         public TeamPage()
         {
             InitializeComponent();
-            FillDropDownList();
-
-
         }
        
         public void setTeam(String _team)
@@ -86,73 +83,7 @@ namespace Projeto_BD
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (this.comboBox2.SelectedItem == null && this.comboBox1.SelectedItem == null)
-            {
-                return;
-            }
-            string old_trainer = null;
-            string new_trainer = null;
-
-            if (this.comboBox1.SelectedItem != null)
-            {
-                old_trainer = this.comboBox1.SelectedItem.ToString();
-            }
-            if (this.comboBox2.SelectedItem != null)
-            {
-                new_trainer = this.comboBox2.SelectedItem.ToString();
-            }
-            
-            changeTrainer(old_trainer,new_trainer);
-            Form1 form = new Form1();
-            form.GetTeam(team,this);
-        }
-
-        private void changeTrainer(string old_trainer,string new_trainer)
-        {
-            Debug.WriteLine(team);
-            Debug.WriteLine(old_trainer);
-            Debug.WriteLine(new_trainer);
-            CN.Open();
-            SqlCommand cmd = new SqlCommand("PROJETO.Change_Trainer", CN);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@equipa", team));
-            
-            if (new_trainer == null)
-            {
-                cmd.Parameters.Add(new SqlParameter("@new_trainer", "NULL"));
-            }
-            else
-            {
-                cmd.Parameters.Add(new SqlParameter("@new_trainer", new_trainer));
-            }
-
-            if (old_trainer == null)
-            {
-                cmd.Parameters.Add(new SqlParameter("@old_trainer", "NULL"));
-            }
-            else
-            {
-                cmd.Parameters.Add(new SqlParameter("@old_trainer", old_trainer));
-            }
-            
-            SqlDataReader reader = cmd.ExecuteReader();
-            CN.Close();
-        }
-
-        private void addPlayer(string name,int num,string role)
-        {
-            CN.Open();
-            SqlCommand cmd = new SqlCommand("PROJETO.AddPlayer", CN);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@nome", name));
-            cmd.Parameters.Add(new SqlParameter("@camisola", num));
-            cmd.Parameters.Add(new SqlParameter("@posicao", role));
-            cmd.Parameters.Add(new SqlParameter("@equipa", team));
-            SqlDataReader reader = cmd.ExecuteReader();
-            CN.Close();
-        }
+        
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -164,41 +95,8 @@ namespace Projeto_BD
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (this.textBox3.Text == null || this.comboBox3.SelectedItem == null || this.textBox5.Text == null)
-            {
-                return;
-            }
-            string name = this.textBox5.Text.ToString();
-            int shirt_num = Int32.Parse(this.textBox3.Text.ToString());
-            string role = this.comboBox3.SelectedItem.ToString();
+        
 
-            addPlayer(name,shirt_num,role);
-            Form1 form = new Form1();
-            form.GetTeam(team, this);
-        }
-
-        private void FillDropDownList()
-        {
-            CN.Open();
-            SqlCommand cmd = new SqlCommand("PROJETO.NomeTreinadores",CN);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                //------------Antigo Treinador--------
-                comboBox1.Items.Add(reader["Nome"]);
-                //------------Novo treinador----------
-                comboBox2.Items.Add(reader["Nome"]);
-            }
-            CN.Close();
-
-            //----------------Posição------------------
-            string[] posicao = { "Atacante", "Medio","Defesa","Guarda-Redes" };
-            comboBox3.Items.AddRange(posicao);
-
-
-        }
+        
     }
 }

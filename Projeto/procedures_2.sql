@@ -325,9 +325,10 @@ create procedure PROJETO.GetTrainerName @equipa varchar(100)
 as
 	declare @tableTemp table(Nome varchar(100), Especializacao varchar(100));
 	declare @treinador int,@clubeT varchar(100);
-
-
 	set @tableTemp = (select * from PROJETO.GetTreinadores);
+
+--drop procedure PROJETO.AddGame
+--drop procedure PROJETO.FillGame
 --drop procedure PROJETO.AddPlayer
 ----drop procedure PROJETO.Change_Trainer
 --drop procedure PROJETO.GetTeamTrainer
