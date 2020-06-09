@@ -384,13 +384,13 @@ as
 				DECLARE c_2 cursor FAST_FORWARD
 				for select j.Clube1,j.Clube2,j.Resultado1,j.Resultado2
 				from PROJETO.Jogo j
+				where j.Resultado1 != NULL or j.Resultado2 != NULL
 				open c_2;
 				fetch c_2 into @clube1, @clube2,@resultado1,@resultado2;
 				begin try
 				begin transaction
 				WHILE @@FETCH_STATUS = 0
 					begin
-
 							if @c_name = @clube1
 								begin
 									if @resultado1 > @resultado2

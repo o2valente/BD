@@ -51,22 +51,24 @@ as
 	DECLARE c cursor FAST_FORWARD
 	for select j.Clube1,j.Clube2,j.Resultado1,j.Resultado2
 	from PROJETO.Jogo j
+	where j.Resultado1 != NULL or j.Resultado2 != NULL
 	open c;
 	fetch c into @clube1, @clube2,@resultado1,@resultado2;
 	begin try
 	begin transaction
 	WHILE @@FETCH_STATUS = 0
 		begin
-			if @nome = @clube1
-				begin
-					set @gm = @gm + @resultado1
-					set @gs = @gs + @resultado2
-				end
-			else if @nome = @clube2
-				begin
-					set @gm = @gm + @resultado2
-					set @gs = @gs + @resultado1
-				end
+
+				if @nome = @clube1
+					begin
+						set @gm = @gm + @resultado1
+						set @gs = @gs + @resultado2
+					end
+				else if @nome = @clube2
+					begin
+						set @gm = @gm + @resultado2
+						set @gs = @gs + @resultado1
+					end
 			
 			fetch c into  @clube1, @clube2,@resultado1,@resultado2;
 				
