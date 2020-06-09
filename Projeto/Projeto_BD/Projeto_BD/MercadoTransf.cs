@@ -23,6 +23,15 @@ namespace Projeto_BD
         {
             InitializeComponent();
             FillDropDownList();
+            //---------------Clubes-----------------
+            CN.Open();
+            SqlCommand clubesCmd = new SqlCommand("select * from PROJETO.getNomesClube", CN);
+            SqlDataReader clubesReader = clubesCmd.ExecuteReader();
+            while (clubesReader.Read())
+            {
+                comboBox4.Items.Add(clubesReader["Nome"]);
+            }
+            CN.Close();
         }
 
         
@@ -41,7 +50,7 @@ namespace Projeto_BD
             {
                 team = comboBox4.SelectedItem.ToString();
             }
-            FillOldTrainerDownList();
+            FillSelectedTeamDownList();
         }
 
         private void MercadoTransf_Load(object sender, EventArgs e)
@@ -126,11 +135,10 @@ namespace Projeto_BD
             CN.Close();
         }
 
-        private void FillOldTrainerDownList()
+        private void FillSelectedTeamDownList()
         {
-
+            //-------------------Old trainer------------
             CN.Open();
-
             SqlCommand cmd_2 = new SqlCommand("PROJETO.GetTeamTrainer", CN);
             cmd_2.CommandType = CommandType.StoredProcedure;
             cmd_2.Parameters.Add(new SqlParameter("@equipa", team));
@@ -141,8 +149,23 @@ namespace Projeto_BD
 
                 //------------Novo treinador----------
                 comboBox1.Items.Add(reader_2["Nome"]);
+                comboBox6.Items.Add(reader_2["Especializacao"] + "-" + reader_2["Nome"]);
             }
             CN.Close();
+
+            //------------Jogadores para Remover---------------
+            CN.Open();
+            SqlCommand jogadoresCmd = new SqlCommand("PROJETO.GetEquipa", CN);
+            jogadoresCmd.CommandType = CommandType.StoredProcedure;
+            jogadoresCmd.Parameters.Add(new SqlParameter("@Clube", team));
+            SqlDataReader jogadoresReader = jogadoresCmd.ExecuteReader();
+            while (jogadoresReader.Read())
+            {
+                comboBox5.Items.Add("Nr: " + jogadoresReader["NrCamisola"] + "-" + jogadoresReader["Nome"] + "-" + jogadoresReader["Posicao"]);
+            }
+            CN.Close();
+
+
         }
 
         private void FillDropDownList()
@@ -152,6 +175,8 @@ namespace Projeto_BD
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox5.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox6.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Items.Add("");
             comboBox2.Items.Add("");
 
@@ -167,18 +192,14 @@ namespace Projeto_BD
             CN.Close();
 
             //----------------Posição------------------
-            string[] posicao = { "Atacante", "Medio", "Defesa", "Guarda-Redes" };
+            string[] posicao = { "Atacante", "Medio", "Defesa", "GuardaRedes" };
             comboBox3.Items.AddRange(posicao);
 
-            //---------------Clubes-----------------
-            CN.Open();
-            SqlCommand clubesCmd = new SqlCommand("select * from PROJETO.getNomesClube", CN);
-            SqlDataReader clubesReader = clubesCmd.ExecuteReader();
-            while (clubesReader.Read())
-            {
-                comboBox4.Items.Add(clubesReader["Nome"]);
-            }
-            CN.Close();
+            
+
+            
+
+            
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -206,6 +227,63 @@ namespace Projeto_BD
         private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
         {
             setTeam();
+            
+            
+        }
+
+        private void ReformarJogador(string nome,string team)
+        {
+            //
+            //setTeam(); //define a equipa
+            CN.Open();
+            SqlCommand cmd = new SqlCommand("PROJETO.ReformarJogador", CN);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@nome", nome));
+            cmd.Parameters.Add(new SqlParameter("@clube", team));
+            CN.Close();
+
+        }
+
+        private void ReformarTreinador(string nome,string team)
+        {
+            CN.Open();
+            SqlCommand cmd = new SqlCommand("PROJETO.ReformarTreinador",CN);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@nome",nome));
+            cmd.Parameters.Add(new SqlParameter("@equipa",team));
+            CN.Close();
+        }
+
+        private void ResetComboBox()
+        {
+            comboBox1.Items.Clear();
+            comboBox2.Items.Clear();
+            comboBox3.Items.Clear();
+            //comboBox4.Items.Clear();
+            comboBox5.Items.Clear();
+            comboBox6.Items.Clear();
+            FillSelectedTeamDownList();
+            FillDropDownList();
+        }
+
+        //remover jogador
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string[] vals = comboBox5.SelectedItem.ToString().Split('-');
+            string jogador = vals[1];
+            ReformarJogador(jogador,team);
+            ResetComboBox();
+        }
+
+        //remover treinador
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string[] vals = comboBox6.SelectedItem.ToString().Split('-');
+            string treinador = vals[1];
+            Debug.WriteLine(treinador);
+            Debug.WriteLine(team);
+            ReformarTreinador(treinador,team);
+            ResetComboBox();
         }
     }
 }

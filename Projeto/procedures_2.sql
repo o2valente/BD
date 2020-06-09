@@ -87,7 +87,7 @@ begin
 		begin
 			if  @nrFed = @treinador
 				begin
-					set @trainerType = 'Treinador de Guarda-Redes';
+					set @trainerType = 'Treinador de GuardaRedes';
 				end
 			fetch cur into @treinador;
 		end;
@@ -190,7 +190,7 @@ as
 	end catch
 	close cur;
 	deallocate cur;
-	select * from @tableTemp;
+	select * from @tableTemp order by Nome;
 
 	--drop procedure PROJETO.GetTreinadores
 
@@ -236,6 +236,7 @@ as
 	deallocate cur;
 	select * from @tableTemp;
 
+	--exec PROJETO.GetTeamTrainer 'CRAC';
 	--drop procedure PROJETO.GetTeamTrainer
 
 ---- Troca 1 treinador de uma equipa, por outro treinador

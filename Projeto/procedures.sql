@@ -267,3 +267,32 @@ as
 
 --drop view PROJETO.getNomesClube;
 
+create procedure PROJETO.ReformarJogador @nome varchar(100), @clube varchar(100)
+as
+	declare @nrFed int;
+	set @nrFed = PROJETO.GetNrFed(@nome);
+	delete from PROJETO.Jogador where NrFederacao = @nrFed  and clube=@clube
+
+--exec PROJETO.RemoveJogador 'Talia Lambot','Sporting Clube de Fermentelos '
+--drop procedure PROJETO.RemoveJogador;
+
+create procedure PROJETO.ReformarTreinador @nome varchar(100), @equipa varchar(100)
+as
+	declare @nrFed int,  @esp varchar(100);
+	declare @tempTable table(Nome varchar(100),Esp varchar(100));
+	set @nrFed = PROJETO.GetNrFed(@nome);
+	insert into @tempTable exec PROJETO.GetTeamTrainer @equipa;
+	set @esp = (select t.Esp from @tempTable t where t.Nome =@nome);
+	if @esp = 'Treinador Principal'
+		delete from PROJETO.TreinadorPrincipal where NrFederacao=@nrFed
+	else if @esp = 'Treinador Adjunto'
+		delete from PROJETO.TreinadorAdjunto WHERE NrFederacao=@nrFed
+	else 
+		delete from PROJETO.TreinadorGuardaRedes WHERE NrFederacao=@nrFed
+	delete from PROJETO.Treinador where NrFederacao=@nrFed
+	
+
+	--drop procedure PROJETO.ReformarTreinador;
+
+	exec PROJETO.GetTeamTrainer 'Arrifanense'
+	exec PROJETO.ReformarTreinador 'Dunn Fishpoole','Arrifanense'
