@@ -31,6 +31,15 @@ namespace Projeto_BD
         {
             return j_nr;
         }
+
+        public void GetStats()
+        {
+            CN.Open();
+            SqlCommand sqlcmd = new SqlCommand("PROJETO.GetStats", CN);
+            sqlcmd.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = sqlcmd.ExecuteReader();
+            CN.Close();
+        }
         public void GetJornada(int nr)
         {
             CN.Open();
@@ -205,12 +214,13 @@ namespace Projeto_BD
                 return;
             }
             j_nr = Int32.Parse(this.textBox1.Text);
-            
+
             GetJornada(j_nr);
         }
 
-        private void innitTabelaClass()
+        public void innitTabelaClass()
         {
+            GetStats();
             //this.Hide();
             //Form goTabela = new TabelaClassificacao();
             //goTabela.Show();
@@ -306,7 +316,7 @@ namespace Projeto_BD
             //tGrid.ShowDialog();
 
         }
-        private void GetTrainers(TrainerForm tform)
+        public void GetTrainers(TrainerForm tform)
         {
             CN.Open();
             SqlCommand cmd = new SqlCommand("PROJETO.GetTreinadores", CN);
@@ -324,6 +334,7 @@ namespace Projeto_BD
         {
             TrainerForm tform = new TrainerForm();
             GetTrainers(tform);
+            tform.setForm(this);
             tform.ShowDialog();
         }
 

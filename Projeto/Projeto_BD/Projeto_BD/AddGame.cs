@@ -42,6 +42,7 @@ namespace Projeto_BD
             cmd.Parameters.Add(new SqlParameter("@res2", _gol2));
             SqlDataReader reader = cmd.ExecuteReader();
             f1.GetJornada(_jornada);
+            f1.innitTabelaClass();
             CN.Close();
         }
         private void button1_Click(object sender, EventArgs e)

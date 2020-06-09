@@ -19,17 +19,17 @@
 
 -- Dado um nome, retorna o nr de federa�ao
 
---create function PROJETO.GetNrFed(@name varchar(100))
---returns varchar(100)
---as
---begin
---	declare @number int;
---	set @number = (select p.NrFederacao
---	from PROJETO.Pessoa p
---	where p.Nome = @name);
---	return @number;
---end;
---go
+create function PROJETO.GetNrFed(@name varchar(100))
+returns varchar(100)
+as
+begin
+	declare @number int;
+	set @number = (select p.NrFederacao
+	from PROJETO.Pessoa p
+	where p.Nome = @name);
+	return @number;
+end;
+go
 
 --SELECT PROJETO.GetNrFed('Dasi Grummitt');
 
@@ -327,6 +327,133 @@ as
 	declare @treinador int,@clubeT varchar(100);
 	set @tableTemp = (select * from PROJETO.GetTreinadores);
 
+
+-------------------------- Adicionar um treinador à BD ------------------------
+create procedure PROJETO.AddTrainer @equipa varchar (100),@nome varchar(100),@especializacao varchar(100),@tatica_pref varchar(100)
+as
+	declare @new_nr int
+	set @new_nr = (SELECT TOP 1 p.NrFederacao FROM PROJETO.Pessoa p ORDER BY p.NrFederacao DESC) + 1;
+
+	begin try
+	begin transaction
+		INSERT INTO PROJETO.Pessoa
+		VALUES(@new_nr,@nome)
+
+		INSERT INTO PROJETO.Treinador
+		VALUES(@new_nr,@equipa)
+
+		if @especializacao = 'Principal'
+			begin
+				INSERT INTO PROJETO.TreinadorPrincipal
+				VALUES(@new_nr,@tatica_pref)
+			end
+		else if @especializacao = 'Adjunto'
+			begin
+				INSERT INTO PROJETO.TreinadorAdjunto
+				VALUES(@new_nr)
+			end
+		else
+			begin
+				INSERT INTO PROJETO.TreinadorGuardaRedes
+				VALUES(@new_nr)
+			end
+		commit transaction
+	end try
+	begin catch
+		rollback transaction
+	end catch
+GO
+
+----------- Updates Victories, Draws and Losses based on games ------------------------
+create procedure PROJETO.GetStats
+as	
+	-------------------------- Percorre todos os clubes----------
+	declare @c_name varchar(100);
+	DECLARE c cursor FAST_FORWARD
+		for select cl.Nome
+		from PROJETO.Clube cl
+		open c;
+		fetch c into @c_name;
+		begin try
+		begin transaction
+		WHILE @@FETCH_STATUS = 0
+			begin
+	------------------------ Percorre todos os jogos ----------------------------
+				declare @wins int = 0, @draws int = 0, @loses int = 0, @clube1 varchar(100), @clube2 varchar(100), @resultado1 int, @resultado2 int;
+				DECLARE c_2 cursor FAST_FORWARD
+				for select j.Clube1,j.Clube2,j.Resultado1,j.Resultado2
+				from PROJETO.Jogo j
+				open c_2;
+				fetch c_2 into @clube1, @clube2,@resultado1,@resultado2;
+				begin try
+				begin transaction
+				WHILE @@FETCH_STATUS = 0
+					begin
+
+							if @c_name = @clube1
+								begin
+									if @resultado1 > @resultado2
+										begin
+											set @wins = @wins + 1;
+										end
+									else if @resultado1 = @resultado2
+										begin
+											set @draws = @draws + 1;
+										end
+									else
+										begin
+											set @loses = @loses + 1;
+										end
+								end
+							else if @c_name = @clube2
+								begin
+									if @resultado1 < @resultado2
+											begin
+												set @wins = @wins + 1;
+											end
+										else if @resultado1 = @resultado2
+											begin
+												set @draws = @draws + 1;
+											end
+										else
+											begin
+												set @loses = @loses + 1;
+											end
+								end
+						fetch c_2 into  @clube1, @clube2,@resultado1,@resultado2;
+					end
+					commit transaction
+				end try
+				begin catch
+					rollback transaction
+				end catch
+
+				close c_2;
+				deallocate c_2;
+
+				UPDATE PROJETO.Clube
+				SET Vitorias = @wins, Empates = @draws, Derrotas = @loses
+				WHERE Nome = @c_name 
+	------------------------------------  Fim dos jogos -------------------------------------------
+			fetch c into  @c_name;
+		end
+		commit transaction
+	end try
+	begin catch
+		rollback transaction
+	end catch
+	close c;
+	deallocate c;
+	--------------------------------------- Fim dos clubes --------------------------------------
+go
+
+exec PROJETO.GetStats
+drop procedure PROJETO.GetStats
+select j.Clube1,j.Resultado1, j.Clube2, j.Resultado2 from PROJETO.Jogo j where j.Clube1 = 'Argoncilhe' or j.Clube2 = 'Argoncilhe'
+
+DELETE FROM
+PROJETO.Jogo
+WHERE Clube1 = Clube2
 --drop procedure PROJETO.AddGame
 --drop procedure PROJETO.FillGame
 --drop procedure PROJETO.AddPlayer
