@@ -227,7 +227,7 @@ namespace Projeto_BD
         private void comboBox4_SelectionChangeCommitted(object sender, EventArgs e)
         {
             setTeam();
-            
+            ResetComboBox();
             
         }
 
@@ -235,11 +235,13 @@ namespace Projeto_BD
         {
             //
             //setTeam(); //define a equipa
+            
             CN.Open();
             SqlCommand cmd = new SqlCommand("PROJETO.ReformarJogador", CN);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@nome", nome));
             cmd.Parameters.Add(new SqlParameter("@clube", team));
+            cmd.ExecuteReader();
             CN.Close();
 
         }
@@ -247,10 +249,11 @@ namespace Projeto_BD
         private void ReformarTreinador(string nome,string team)
         {
             CN.Open();
-            SqlCommand cmd = new SqlCommand("PROJETO.ReformarTreinador",CN);
+            SqlCommand cmd = new SqlCommand("PROJETO.ReformarTreinador", CN);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("@nome",nome));
             cmd.Parameters.Add(new SqlParameter("@equipa",team));
+            cmd.ExecuteReader();
             CN.Close();
         }
 
@@ -280,8 +283,6 @@ namespace Projeto_BD
         {
             string[] vals = comboBox6.SelectedItem.ToString().Split('-');
             string treinador = vals[1];
-            Debug.WriteLine(treinador);
-            Debug.WriteLine(team);
             ReformarTreinador(treinador,team);
             ResetComboBox();
         }

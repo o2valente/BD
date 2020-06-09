@@ -294,5 +294,5 @@ as
 
 	--drop procedure PROJETO.ReformarTreinador;
 
-	exec PROJETO.GetTeamTrainer 'Arrifanense'
-	exec PROJETO.ReformarTreinador 'Dunn Fishpoole','Arrifanense'
+	exec PROJETO.GetTeamTrainer 'ACRD Mosteiro'
+	exec PROJETO.ReformarTreinador 'Yuma Holdren','ACRD Mosteiro'
