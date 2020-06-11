@@ -88,6 +88,8 @@ namespace Projeto_BD
             int gol2 = Int32.Parse(this.textBox4.Text.ToString());
 
             UpdateGame(spectators,arbitro,gol1,gol2);
+            f1.innitTabelaClass();
+            f1.GetJornada(f1.getJr());
         }
 
         private void FillDropDown()

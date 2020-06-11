@@ -77,6 +77,7 @@ namespace Projeto_BD
             InfoJogo info = new InfoJogo();
             info.getLabel().Text = vals[1];
             GetInfoJogo(nrJogo,info);
+            info.setForm1(this);
             info.Show();
         }
 
