@@ -16,8 +16,8 @@ namespace Projeto_BD
 {
     public partial class Form1 : Form
     {
-        //static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p2g4" + "; uid = " + "p2g4" + ";" + "password = " + "RV{'a~SyES>8_gy[");
-        static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
+        static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p2g4" + "; uid = " + "p2g4" + ";" + "password = " + "RV{'a~SyES>8_gy[");
+       // static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
         private int j_nr;
         private System.Data.DataSet dataSet;
 
@@ -288,12 +288,15 @@ namespace Projeto_BD
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Debug.WriteLine("ola");
             DataGridView dview = (DataGridView)sender;
-            TeamPage Teamform = new TeamPage();
-            Teamform.gridInnit();
-            GetTeam(dview.SelectedCells[0].Value.ToString(), Teamform);
-            Teamform.ShowDialog();
+            if(e.ColumnIndex == 0 && e.RowIndex >= 0)
+            {
+                TeamPage Teamform = new TeamPage();
+                Teamform.gridInnit();
+                GetTeam(dview.SelectedCells[0].Value.ToString(), Teamform);
+                Teamform.ShowDialog();
+            }
+            
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

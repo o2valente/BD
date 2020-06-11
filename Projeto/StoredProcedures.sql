@@ -55,7 +55,7 @@ as
 	DECLARE c cursor FAST_FORWARD
 	for select j.Clube1,j.Clube2,j.Resultado1,j.Resultado2
 	from PROJETO.Jogo j
-	where j.Resultado1 != NULL or j.Resultado2 != NULL
+	where j.Resultado1 IS NOT NULL and j.Resultado2 IS NOT NULL
 	open c;
 	fetch c into @clube1, @clube2,@resultado1,@resultado2;
 	begin try
@@ -88,7 +88,7 @@ as
 	select * from @tempTable;
 go
 --exec PROJETO.getGolos 'ACRD Mosteiro';
---drop procedure PROJETO.getGolos;
+drop procedure PROJETO.getGolos;
 	
 
 
@@ -538,7 +538,7 @@ as
 				DECLARE c_2 cursor FAST_FORWARD
 				for select j.Clube1,j.Clube2,j.Resultado1,j.Resultado2
 				from PROJETO.Jogo j
-				where j.Resultado1 != NULL or j.Resultado2 != NULL
+				WHERE j.Resultado1 IS NOT NULL and j.Resultado2 IS NOT NULL
 				open c_2;
 				fetch c_2 into @clube1, @clube2,@resultado1,@resultado2;
 				begin try

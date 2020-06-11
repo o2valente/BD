@@ -14,8 +14,8 @@ namespace Projeto_BD
 {
     public partial class MercadoTransf : Form
     {
-        //static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p2g4" + "; uid = " + "p2g4" + ";" + "password = " + "RV{'a~SyES>8_gy[");
-        static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
+        static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p2g4" + "; uid = " + "p2g4" + ";" + "password = " + "RV{'a~SyES>8_gy[");
+        //static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
         String team;
         private Form1 f1;
 
