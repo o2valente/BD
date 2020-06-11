@@ -61,7 +61,7 @@ namespace Projeto_BD
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if (this.comboBox2.SelectedItem == null && this.comboBox1.SelectedItem == null)
+            if ((this.comboBox2.SelectedItem == null && this.comboBox1.SelectedItem == null) || this.comboBox4.SelectedItem==null)
             {
                 return;
             }
@@ -204,7 +204,7 @@ namespace Projeto_BD
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (this.textBox3.Text == null || this.comboBox3.SelectedItem == null || this.textBox5.Text == null)
+            if (this.textBox3.Text == null || this.comboBox3.SelectedItem == null || this.textBox5.Text == null || this.comboBox4.SelectedItem == null)
             {
                 Debug.WriteLine("NULL");
                 return;
@@ -272,19 +272,34 @@ namespace Projeto_BD
         //remover jogador
         private void button3_Click(object sender, EventArgs e)
         {
-            string[] vals = comboBox5.SelectedItem.ToString().Split('-');
-            string jogador = vals[1];
-            ReformarJogador(jogador,team);
-            ResetComboBox();
+            if (comboBox4.SelectedItem == null || comboBox5.SelectedItem == null)
+            {
+                return;
+            }
+            else
+            {
+                string[] vals = comboBox5.SelectedItem.ToString().Split('-');
+                string jogador = vals[1];
+                ReformarJogador(jogador, team);
+                ResetComboBox();
+            }
+            
         }
 
         //remover treinador
         private void button4_Click(object sender, EventArgs e)
         {
-            string[] vals = comboBox6.SelectedItem.ToString().Split('-');
-            string treinador = vals[1];
-            ReformarTreinador(treinador,team);
-            ResetComboBox();
+            if (comboBox4.SelectedItem == null || comboBox6.SelectedItem == null)
+            {
+                return;
+            }
+            else
+            {
+                string[] vals = comboBox6.SelectedItem.ToString().Split('-');
+                string treinador = vals[1];
+                ReformarTreinador(treinador, team);
+                ResetComboBox();
+            }
         }
     }
 }

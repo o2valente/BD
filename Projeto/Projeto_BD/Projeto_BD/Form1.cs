@@ -27,6 +27,13 @@ namespace Projeto_BD
             innitTabelaClass();
         }
 
+        public DataGridView getTabelaClass()
+        {
+            return this.dataGridView1;
+        }
+
+      
+
         public int getJr()
         {
             return j_nr;
@@ -184,28 +191,6 @@ namespace Projeto_BD
             CN.Close();
         }
 
-        //private void GetTeamGrid(string team/*, TeamGrid tgrid*/)
-        //{
-        //    DataSet ds = new DataSet();
-        //    try
-        //    {
-        //        CN.Open();
-        //        SqlCommand cmd = new SqlCommand("GetEquipa", CN);
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.AddWithValue("@Clube", team);
-        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //        da.Fill(ds);
-        //        //tgrid.getGrid().DataSource = ds;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //    }
-        //    finally
-        //    {
-        //        CN.Close();
-        //    }
-        //}
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -221,9 +206,6 @@ namespace Projeto_BD
         public void innitTabelaClass()
         {
             GetStats();
-            //this.Hide();
-            //Form goTabela = new TabelaClassificacao();
-            //goTabela.Show();
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
             this.dataGridView1.AllowUserToResizeColumns = false;
@@ -255,6 +237,12 @@ namespace Projeto_BD
 
             this.dataGridView1.Rows.Clear();
 
+            FilltabelaClass(this.dataGridView1);
+            
+        }
+
+        public void FilltabelaClass(DataGridView dview)
+        {
             CN.Open();
             SqlCommand cmd = new SqlCommand("PROJETO.TabelaClass", CN);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -271,10 +259,9 @@ namespace Projeto_BD
             CN.Close();
             for (int i = 0; i < 18; i++)
             {
-                //dtbl.NewRow. = "Sporting Clube de Portugal " + i + " vitórias";
-                this.dataGridView1.RowHeadersVisible = false;
+                dview.RowHeadersVisible = false;
                 string[] row = rows.ElementAt(i);
-                /*int drow = */this.dataGridView1.Rows.Add(row);
+                dview.Rows.Add(row);
 
             }
         }
@@ -309,16 +296,6 @@ namespace Projeto_BD
 
         }
 
-        private void dataGridView1_DoubleClick(object sender, EventArgs e)
-        {
-            
-
-            // StoredProcedure
-            //TeamGrid tGrid = new TeamGrid();
-            //GetTeamGrid(dview.SelectedCells[0].Value.ToString(), tGrid);
-            //tGrid.ShowDialog();
-
-        }
         public void GetTrainers(TrainerForm tform)
         {
             CN.Open();

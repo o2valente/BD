@@ -16,12 +16,18 @@ namespace Projeto_BD
         static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p2g4" + "; uid = " + "p2g4" + ";" + "password = " + "RV{'a~SyES>8_gy[");
         //static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
 
+        private Form1 f1;
         private int game_number;
         public InfoJogo()
         {
             InitializeComponent();
             FillDropDown();
             
+        }
+
+        public void setForm1(Form1 _f1)
+        {
+            f1 = _f1;
         }
 
         public void setNumber(int _num)
@@ -64,8 +70,9 @@ namespace Projeto_BD
             cmd.Parameters.Add(new SqlParameter("@res1", _gol1));
             cmd.Parameters.Add(new SqlParameter("@res2", _gol2));
             SqlDataReader reader = cmd.ExecuteReader();
-            Form1 form = new Form1();
-            form.GetInfoJogo(game_number,this);
+            f1.GetInfoJogo(game_number,this);
+            f1.getTabelaClass().Rows.Clear();
+            f1.FilltabelaClass(f1.getTabelaClass());
             CN.Close();
         }
         private void button1_Click(object sender, EventArgs e)
