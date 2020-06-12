@@ -14,8 +14,7 @@ namespace Projeto_BD
     public partial class AddGame : Form
     {
         private Form1 f1;
-        //static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
-        static Helper con = new Helper();
+         static Helper con = new Helper();
         static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + con.Initcat + "; uid = " + con.Uid + ";" + "password = " + con.Pass);
         public AddGame()
         {
@@ -28,19 +27,26 @@ namespace Projeto_BD
             f1 = _f1;
         }
 
-        private void Add_Game(int _spectators,string _stadium,int _jornada, int _arbitro, int _gol1, int _gol2,string _club1,string _club2)
+        private object ToDBNull(object value)
+        {
+            if (null != value)
+                return value;
+            return DBNull.Value;
+        }
+
+        private void Add_Game(int? _spectators,string _stadium,int _jornada, int? _arbitro, int? _gol1, int? _gol2,string _club1,string _club2)
         {
             CN.Open();
             SqlCommand cmd = new SqlCommand("PROJETO.AddGame", CN);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@espetadores", _spectators));
+            cmd.Parameters.Add(new SqlParameter("@espetadores", ToDBNull(_spectators)));
             cmd.Parameters.Add(new SqlParameter("@estadio", _stadium));
             cmd.Parameters.Add(new SqlParameter("@jornada", _jornada));
-            cmd.Parameters.Add(new SqlParameter("@arbitragem", _arbitro));
+            cmd.Parameters.Add(new SqlParameter("@arbitragem", ToDBNull(_arbitro)));
             cmd.Parameters.Add(new SqlParameter("@clube1", _club1));
             cmd.Parameters.Add(new SqlParameter("@clube2", _club2));
-            cmd.Parameters.Add(new SqlParameter("@res1", _gol1));
-            cmd.Parameters.Add(new SqlParameter("@res2", _gol2));
+            cmd.Parameters.Add(new SqlParameter("@res1", ToDBNull(_gol1)));
+            cmd.Parameters.Add(new SqlParameter("@res2", ToDBNull(_gol2)));
             SqlDataReader reader = cmd.ExecuteReader();
             f1.GetJornada(_jornada);
             f1.innitTabelaClass();
@@ -48,15 +54,30 @@ namespace Projeto_BD
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.textBox1.Text == null || this.comboBox1.SelectedItem == null || this.comboBox2.SelectedItem == null || this.comboBox3.SelectedItem == null || this.comboBox4.SelectedItem == null || this.textBox6.Text == null || this.textBox7.Text == null )
+            if (this.comboBox1.SelectedItem == null || this.comboBox2.SelectedItem == null || this.comboBox3.SelectedItem == null || this.comboBox4.SelectedItem == null )
             {
                 return;
             }
-
-            int spectators = Int32.Parse(this.textBox1.Text.ToString());
-            int arbitro = Int32.Parse(this.comboBox5.SelectedItem.ToString());
-            int gol1 = Int32.Parse(this.textBox6.Text.ToString());
-            int gol2 = Int32.Parse(this.textBox7.Text.ToString());
+            int? spectators = null;
+            int? gol1 = null;
+            int? gol2 = null;
+            int? arbitro = null;
+            if(textBox1.Text != "")
+            {
+                spectators = Int32.Parse(this.textBox1.Text.ToString());
+            }
+            if (textBox6.Text != "")
+            {
+                gol1 = Int32.Parse(this.textBox6.Text.ToString());
+            }
+            if (textBox7.Text != "")
+            {
+                gol2 = Int32.Parse(this.textBox7.Text.ToString());
+            }
+            if (comboBox5.SelectedItem != null)
+            {
+                arbitro = Int32.Parse(this.comboBox5.SelectedItem.ToString());
+            }
             string stadium = this.comboBox1.SelectedItem.ToString();
             int jornada = Int32.Parse(this.comboBox2.SelectedItem.ToString());
             string club1 = this.comboBox3.SelectedItem.ToString();

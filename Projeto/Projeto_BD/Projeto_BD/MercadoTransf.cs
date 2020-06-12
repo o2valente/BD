@@ -14,9 +14,8 @@ namespace Projeto_BD
 {
     public partial class MercadoTransf : Form
     {
-        static Helper con = new Helper();
+         static Helper con = new Helper();
         static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + con.Initcat + "; uid = " + con.Uid + ";" + "password = " + con.Pass);
-        //static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
         String team;
         private Form1 f1;
 
@@ -215,6 +214,7 @@ namespace Projeto_BD
             string role = this.comboBox3.SelectedItem.ToString();
             Debug.WriteLine(team);
             addPlayer(name, shirt_num, role);
+            ResetComboBox();
             //Form1 form = new Form1();
             //TeamPage tp = new TeamPage();
             //form.GetTeam(team, tp);
@@ -249,6 +249,8 @@ namespace Projeto_BD
 
         private void ReformarTreinador(string nome,string team)
         {
+            Debug.WriteLine(nome);
+            Debug.WriteLine(team);
             CN.Open();
             SqlCommand cmd = new SqlCommand("PROJETO.ReformarTreinador", CN);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -266,6 +268,8 @@ namespace Projeto_BD
             //comboBox4.Items.Clear();
             comboBox5.Items.Clear();
             comboBox6.Items.Clear();
+            textBox3.Text = "";
+            textBox5.Text = "";
             FillSelectedTeamDownList();
             FillDropDownList();
         }

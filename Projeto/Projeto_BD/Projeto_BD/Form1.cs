@@ -16,10 +16,10 @@ namespace Projeto_BD
 {
     public partial class Form1 : Form
     {
-        static Helper con = new Helper();
+         static Helper con = new Helper();
         static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + con.Initcat + "; uid = " + con.Uid + ";" + "password = " + con.Pass);
-       // static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
         private int j_nr;
+        private int n_epoca;
         private System.Data.DataSet dataSet;
 
         public Form1()
@@ -28,6 +28,7 @@ namespace Projeto_BD
             innitTabelaClass();
         }
 
+        
         public DataGridView getTabelaClass()
         {
             return this.dataGridView1;
@@ -38,6 +39,10 @@ namespace Projeto_BD
         public int getJr()
         {
             return j_nr;
+        }
+        public int getEpoca()
+        {
+            return n_epoca;
         }
 
         public void GetStats()
@@ -67,6 +72,10 @@ namespace Projeto_BD
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(listBox1.SelectedItem == null)
+            {
+                return;
+            }
             string sel = listBox1.SelectedItem.ToString();
             string[] vals = sel.Split(':');
             int nrJogo=Int32.Parse(vals[0]);
