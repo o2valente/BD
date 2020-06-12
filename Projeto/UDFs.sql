@@ -1,4 +1,4 @@
---retorna o nome da pessoa
+--retorna o nome da pessoa dado o seu número da federação 
 create function PROJETO.nomePessoa(@nr int)
 returns varchar(100)
 as

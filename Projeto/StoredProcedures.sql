@@ -46,7 +46,7 @@ go
 --exec PROJETO.TCpontos 'Calvao'
 --drop procedure PROJETO.TCpontos
 
---devolve Golos Marcados, Golos sofridos
+--devolve Golos Marcados, Golos sofridos dado um clube
 create procedure PROJETO.getGolos(@nome varchar(100))
 as
 	declare @gm int=0, @gs int=0, 
@@ -87,12 +87,13 @@ as
 	insert into @tempTable values(@nome,@gm,@gs);
 	select * from @tempTable;
 go
---exec PROJETO.getGolos 'ACRD Mosteiro';
+
+exec PROJETO.getGolos 'ACRD Mosteiro';
 drop procedure PROJETO.getGolos;
 	
 
 
---Retorna a tabela de classficca��o
+--Retorna a tabela de classificacao
 create procedure PROJETO.TabelaClass 
 as
 	declare @Pontos int =0;
@@ -174,7 +175,7 @@ go
 --drop procedure PROJETO.infoJogo
 
 
-
+--dado um clube devolve a direcao 
 create procedure PROJETO.getDirecao @clube varchar(100)
 as
 	declare @tempTable table(pres varchar(100),presAss varchar(100),admini varchar(100));
@@ -190,6 +191,7 @@ as
 --drop procedure PROJETO.getDirecao
 --exec PROJETO.getDirecao 'CRAC'
 
+--devolve os nomes de todos os treinadores
 create procedure PROJETO.NomeTreinadores
 as
 	declare @tableTemp table(Nome varchar(100));
@@ -222,7 +224,7 @@ go
 --drop procedure PROJETO.Nometreinadores
 
 
-
+--Dado um nome do jogador e seu clube, reforma esse jogador (Retira da tabela PROJETO.Jogador)
 create procedure PROJETO.ReformarJogador @nome varchar(100), @clube varchar(100)
 as
 	declare @nrFed int;
@@ -232,6 +234,7 @@ as
 --exec PROJETO.RemoveJogador 'Talia Lambot','Sporting Clube de Fermentelos '
 --drop procedure PROJETO.RemoveJogador;
 
+--Dado um nome do jogador e seu clube, reforma esse treinador (Retira da tabela PROJETO.Treinador)
 create procedure PROJETO.ReformarTreinador @nome varchar(100), @equipa varchar(100)
 as
 	declare @nrFed int,  @esp varchar(100);

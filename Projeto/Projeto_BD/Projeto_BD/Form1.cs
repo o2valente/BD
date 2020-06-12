@@ -16,7 +16,8 @@ namespace Projeto_BD
 {
     public partial class Form1 : Form
     {
-        static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + "p2g4" + "; uid = " + "p2g4" + ";" + "password = " + "RV{'a~SyES>8_gy[");
+        static Helper con = new Helper();
+        static SqlConnection CN = new SqlConnection("Data Source = " + "tcp:mednat.ieeta.pt" + @"\" + "SQLSERVER,8101" + " ;" + "Initial Catalog = " + con.Initcat + "; uid = " + con.Uid + ";" + "password = " + con.Pass);
        // static SqlConnection CN = new SqlConnection("data source = localhost; integrated security = true; initial catalog = master");
         private int j_nr;
         private System.Data.DataSet dataSet;
