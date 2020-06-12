@@ -1,1 +1,1 @@
-create index idxNrJornada on PROJETO.Jornada(NrJornada);
+create index idxEA on PROJETO.EquipaArbitragem(ArbitroCampo,ArbitroLinha1,ArbitroLinha2,QuartoArbitro);
