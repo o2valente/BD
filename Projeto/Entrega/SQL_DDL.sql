@@ -1,0 +1,410 @@
+USE [p2g4]
+GO
+/****** Object:  User [p2g4]    Script Date: 12/06/2020 17:32:58 ******/
+CREATE USER [p2g4] FOR LOGIN [p2g4] WITH DEFAULT_SCHEMA=[dbo]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [p2g4]
+GO
+/****** Object:  Schema [PROJETO]    Script Date: 12/06/2020 17:32:59 ******/
+CREATE SCHEMA [PROJETO]
+GO
+
+
+/****** Object:  Table [PROJETO].[EquipaArbitragem]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[EquipaArbitragem](
+	[ID] [tinyint] NOT NULL,
+	[ArbitroCampo] [int] NOT NULL,
+	[ArbitroLinha1] [int] NOT NULL,
+	[ArbitroLinha2] [int] NOT NULL,
+	[QuartoArbitro] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [PROJETO].[Estadio]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Estadio](
+	[Nome] [varchar](100) NOT NULL,
+	[Capacidade] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [PROJETO].[Jornada]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Jornada](
+	[NrJornada] [int] NOT NULL,
+	[Semana] [tinyint] NOT NULL,
+	[Ano] [smallint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrJornada] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [PROJETO].[Clube]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Clube](
+	[Nome] [varchar](100) NOT NULL,
+	[Vitorias] [tinyint] NOT NULL,
+	[Derrotas] [tinyint] NOT NULL,
+	[Empates] [tinyint] NOT NULL,
+	[Estadio] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [PROJETO].[Arbitro]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Arbitro](
+	[NrFederacao] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[ArbitroCampo]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[ArbitroCampo](
+	[NrFederacao] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[ArbitroLinha]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[ArbitroLinha](
+	[NrFederacao] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[Direcao]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Direcao](
+	[Presidente] [int] NOT NULL,
+	[PresAssGeral] [int] NOT NULL,
+	[Administrador] [int] NOT NULL,
+	[nome_clube] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Presidente] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[Epoca]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Epoca](
+	[Ano] [smallint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Ano] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[GrupoAdeptos]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[GrupoAdeptos](
+	[Nome] [varchar](100) NOT NULL,
+	[DataFundacao] [date] NOT NULL,
+	[clube_apoia] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[Jogador]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Jogador](
+	[NrFederacao] [int] NOT NULL,
+	[NrCamisola] [tinyint] NOT NULL,
+	[Posicao] [varchar](50) NOT NULL,
+	[clube] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[Jogo]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Jogo](
+	[NrJogo] [int] NOT NULL,
+	[NrEspetadores] [int] NULL,
+	[Estadio] [varchar](100) NOT NULL,
+	[NrJornada] [int] NOT NULL,
+	[EquipaArbitragem] [tinyint] NULL,
+	[Clube1] [varchar](100) NOT NULL,
+	[Clube2] [varchar](100) NOT NULL,
+	[Resultado1] [int] NULL,
+	[Resultado2] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrJogo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[Pessoa]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Pessoa](
+	[NrFederacao] [int] NOT NULL,
+	[Nome] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[QuartoArbitro]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[QuartoArbitro](
+	[NrFederacao] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[Treinador]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Treinador](
+	[NrFederacao] [int] NOT NULL,
+	[ClubeTreinado] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[TreinadorAdjunto]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[TreinadorAdjunto](
+	[NrFederacao] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[TreinadorGuardaRedes]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[TreinadorGuardaRedes](
+	[NrFederacao] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[TreinadorPrincipal]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[TreinadorPrincipal](
+	[NrFederacao] [int] NOT NULL,
+	[TaticaPreferida] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NrFederacao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[TreinadorSubstitui]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[TreinadorSubstitui](
+	[id] [int] NOT NULL,
+	[TreinadorEntra] [int] NULL,
+	[TreinadorSai] [int] NULL,
+	[Clube] [varchar](100) NOT NULL,
+	[DataSubstituicao] [date] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [PROJETO].[Vence]    Script Date: 12/06/2020 17:32:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [PROJETO].[Vence](
+	[Pontos] [tinyint] NULL,
+	[ClubeVencedor] [varchar](100) NULL,
+	[AnoEpoca] [smallint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[AnoEpoca] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+ALTER TABLE [PROJETO].[Arbitro]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Pessoa] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[ArbitroCampo]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Arbitro] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[ArbitroLinha]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Arbitro] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[Clube]  WITH CHECK ADD FOREIGN KEY([Estadio])
+REFERENCES [PROJETO].[Estadio] ([Nome])
+GO
+ALTER TABLE [PROJETO].[Direcao]  WITH CHECK ADD FOREIGN KEY([Administrador])
+REFERENCES [PROJETO].[Pessoa] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[Direcao]  WITH CHECK ADD FOREIGN KEY([nome_clube])
+REFERENCES [PROJETO].[Clube] ([Nome])
+GO
+ALTER TABLE [PROJETO].[Direcao]  WITH CHECK ADD FOREIGN KEY([PresAssGeral])
+REFERENCES [PROJETO].[Pessoa] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[Direcao]  WITH CHECK ADD FOREIGN KEY([Presidente])
+REFERENCES [PROJETO].[Pessoa] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[EquipaArbitragem]  WITH CHECK ADD FOREIGN KEY([ArbitroCampo])
+REFERENCES [PROJETO].[ArbitroCampo] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[EquipaArbitragem]  WITH CHECK ADD FOREIGN KEY([ArbitroLinha1])
+REFERENCES [PROJETO].[ArbitroLinha] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[EquipaArbitragem]  WITH CHECK ADD FOREIGN KEY([ArbitroLinha2])
+REFERENCES [PROJETO].[ArbitroLinha] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[EquipaArbitragem]  WITH CHECK ADD FOREIGN KEY([QuartoArbitro])
+REFERENCES [PROJETO].[QuartoArbitro] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[GrupoAdeptos]  WITH CHECK ADD FOREIGN KEY([clube_apoia])
+REFERENCES [PROJETO].[Clube] ([Nome])
+GO
+ALTER TABLE [PROJETO].[Jogador]  WITH CHECK ADD FOREIGN KEY([clube])
+REFERENCES [PROJETO].[Clube] ([Nome])
+GO
+ALTER TABLE [PROJETO].[Jogador]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Pessoa] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[Jogo]  WITH CHECK ADD FOREIGN KEY([Clube1])
+REFERENCES [PROJETO].[Clube] ([Nome])
+GO
+ALTER TABLE [PROJETO].[Jogo]  WITH CHECK ADD FOREIGN KEY([Clube2])
+REFERENCES [PROJETO].[Clube] ([Nome])
+GO
+ALTER TABLE [PROJETO].[Jogo]  WITH CHECK ADD FOREIGN KEY([Estadio])
+REFERENCES [PROJETO].[Estadio] ([Nome])
+GO
+ALTER TABLE [PROJETO].[Jogo]  WITH CHECK ADD FOREIGN KEY([NrJornada])
+REFERENCES [PROJETO].[Jornada] ([NrJornada])
+GO
+ALTER TABLE [PROJETO].[Jornada]  WITH CHECK ADD FOREIGN KEY([Ano])
+REFERENCES [PROJETO].[Epoca] ([Ano])
+GO
+ALTER TABLE [PROJETO].[QuartoArbitro]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Arbitro] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[Treinador]  WITH CHECK ADD FOREIGN KEY([ClubeTreinado])
+REFERENCES [PROJETO].[Clube] ([Nome])
+GO
+ALTER TABLE [PROJETO].[Treinador]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Pessoa] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[TreinadorAdjunto]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Treinador] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[TreinadorGuardaRedes]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Treinador] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[TreinadorPrincipal]  WITH CHECK ADD FOREIGN KEY([NrFederacao])
+REFERENCES [PROJETO].[Treinador] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[TreinadorSubstitui]  WITH CHECK ADD FOREIGN KEY([Clube])
+REFERENCES [PROJETO].[Clube] ([Nome])
+GO
+ALTER TABLE [PROJETO].[TreinadorSubstitui]  WITH CHECK ADD FOREIGN KEY([TreinadorEntra])
+REFERENCES [PROJETO].[Treinador] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[TreinadorSubstitui]  WITH CHECK ADD FOREIGN KEY([TreinadorSai])
+REFERENCES [PROJETO].[Treinador] ([NrFederacao])
+GO
+ALTER TABLE [PROJETO].[Vence]  WITH CHECK ADD FOREIGN KEY([AnoEpoca])
+REFERENCES [PROJETO].[Epoca] ([Ano])
+GO
+ALTER TABLE [PROJETO].[Vence]  WITH CHECK ADD FOREIGN KEY([ClubeVencedor])
+REFERENCES [PROJETO].[Clube] ([Nome])
+GO
+
+
